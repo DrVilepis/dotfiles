@@ -79,20 +79,6 @@ local sidemenu = function(s)
                 box(command([[/bin/sh -c "curl -s https://koira.testausserveri.fi/api/guildInfo | grep -Po '(?<=\"messagesToday\":)\d*'"]])),
                 layout = wibox.layout.flex.horizontal,
             },
-            box(wibox.widget {
-                data_list = {
-                    { 'L1', 100 },
-                    { 'L2', 200 },
-                    { 'L3', 300 },
-                },
-                border_width = 1,
-                colors = {
-                    beautiful.bg_normal,
-                    beautiful.bg_highlight,
-                    beautiful.border_color,
-                },
-                widget = wibox.widget.piechart
-            })
         },
         widget = wibox.container.margin,
         margins = 6,
