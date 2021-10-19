@@ -27,19 +27,19 @@ font:
 
 # Colors
 schemes:
-  everforest_dark_hard: &everforest_dark
+  everforest_dark: &everforest_dark
     primary:
       background: '#0f140f'
       foreground: '#d3c6aa'
     normal:
-      black:   '#4b565c'
-      red:     '#e67e80'
-      green:   '#a7c080'
-      yellow:  '#dbbc7f'
-      blue:    '#7fbbb3'
-      magenta: '#d699b6'
-      cyan:    '#83c092'
-      white:   '#d3c6aa'
+      black:   '#404a4f'
+      red:     '#de5456'
+      green:   '#8eae5b'
+      yellow:  '#d2ac60'
+      blue:    '#54a095'
+      magenta: '#cb7ca2'
+      cyan:    '#6ab47c'
+      white:   '#c7b794'
     bright:
       black:   '#4b565c'
       red:     '#e67e80'
