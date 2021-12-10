@@ -6,7 +6,8 @@ local box = function(w)
             {
                 w,
                 widget = wibox.container.margin,
-                left = 8,
+                left = 6,
+                right = 6,
                 top = 6,
                 bottom = 6,
             },
@@ -21,7 +22,7 @@ end
 
 local command = function(c,t,i)
     return awful.widget.watch(c,t,function(widget,stdout)
-    widget:set_text(stdout:sub(1,-2))
+        widget:set_text(stdout:sub(1,-2))
     end)
 end
 
@@ -38,7 +39,7 @@ local sidemenu = function(s)
         shape = function(cr,w,h) 
             gears.shape.partially_rounded_rect(cr,w,h,false,true,true,false)
         end
-        }
+    }
     menu : setup {
         {
             layout = wibox.layout.fixed.vertical,
@@ -75,8 +76,12 @@ local sidemenu = function(s)
                 layout = wibox.layout.flex.horizontal,
             },
             {
-                box(command([[/bin/sh -c "curl -s https://koira.testausserveri.fi/api/guildInfo | grep -Po '(?<=\"memberCount\":)\d*'"]])),
-                box(command([[/bin/sh -c "curl -s https://koira.testausserveri.fi/api/guildInfo | grep -Po '(?<=\"messagesToday\":)\d*'"]])),
+                {
+                    box(command([[/bin/sh -c "curl -s https://koira.testausserveri.fi/api/guildInfo | grep -Po '(?<=\"memberCount\":)\d*'"]], 600)),
+                    box(command([[/bin/sh -c "curl -s https://koira.testausserveri.fi/api/guildInfo | grep -Po '(?<=\"messagesToday\":)\d*'"]], 300)),
+                    layout = wibox.layout.flex.vertical,
+                },
+                box(command([[/bin/sh -c "pacman -Qu | wc -l"]], 300)),
                 layout = wibox.layout.flex.horizontal,
             },
         },

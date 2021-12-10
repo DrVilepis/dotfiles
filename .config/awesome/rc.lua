@@ -15,6 +15,7 @@ beautiful = require("beautiful")
 naughty = require("naughty")
 menubar = require("menubar")
 hotkeys_popup = require("awful.hotkeys_popup")
+local bling = require("bling")
 require("awful.hotkeys_popup.keys")
 
 -- {{{ Error handling
@@ -66,7 +67,7 @@ awful.layout.layouts = {
     -- awful.layout.suit.fair.horizontal,
     -- awful.layout.suit.spiral,
     -- awful.layout.suit.spiral.dwindle,
-    -- awful.layout.suit.max,
+    awful.layout.suit.max,
     -- awful.layout.suit.max.fullscreen,
     -- awful.layout.suit.magnifier,
     -- awful.layout.suit.corner.nw,
@@ -104,13 +105,13 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 local taglist_buttons = gears.table.join(
     awful.button({ }, 1, function(t) t:view_only() end),
     awful.button({ modkey }, 1, function(t)
-            if client.focus then
+        if client.focus then
             client.focus:move_to_tag(t)
         end
     end),
     awful.button({ }, 3, awful.tag.viewtoggle),
     awful.button({ modkey }, 3, function(t)
-            if client.focus then
+        if client.focus then
             client.focus:toggle_tag(t)
         end
     end),
@@ -119,7 +120,7 @@ local taglist_buttons = gears.table.join(
 )
 
 local tasklist_buttons = gears.table.join(
-     awful.button({ }, 1, function (c)
+    awful.button({ }, 1, function (c)
         if c == client.focus then
             c.minimized = true
         else
@@ -149,7 +150,7 @@ local function set_wallpaper(s)
         if type(wallpaper) == "function" then
             wallpaper = wallpaper(s)
         end
-        gears.wallpaper.maximized(wallpaper, s, false)
+        gears.wallpaper.maximized(wallpaper, s)
     end
 end
 
@@ -160,10 +161,10 @@ screen.connect_signal("property::geometry", set_wallpaper)
 -- Create clock
 mytextclock = wibox.widget.textclock("%a %T %F",1)
 
-local rounded_box = function(s)
+local rounded_box = function(w)
     return {
         {
-            s,
+            w,
             widget = wibox.container.background,
             shape = gears.shape.rounded_rect,
             bg = beautiful.accent
@@ -241,32 +242,6 @@ awful.screen.connect_for_each_screen(function(s)
                 gears.shape.rounded_rect(cr,w,h)
             end
         }
-        s.greeter : setup {
-            {
-                layout = wibox.layout.flex.vertical,
-                wibox.widget {
-                    widget = wibox.widget.textbox,
-                    text = 'Welcome, Doctor.',
-                    valign = 'center',
-                    align = 'center',
-                    font = "JetBrainsMono Nerd Font Mono 40",
-                },
-            },
-            widget = wibox.container.margin,
-            margins = 6,
-        }
-        local timer = gears.timer {
-            timeout   = 0.01,
-            call_now  = true,
-            autostart = false,
-            callback  = function()
-                s.greeter.height = s.greeter.height + 2;
-                s.greeter.y = s.greeter.y - 1;
-            end
-        }
-        gears.timer.weak_start_new(1,function() 
-            timer : stop();
-        end)
     end
 
 
@@ -332,7 +307,6 @@ awful.screen.connect_for_each_screen(function(s)
         }
     } 
 
-
     -- create the wibox
     s.mywibox = awful.wibar({ 
         position = "top",
@@ -356,9 +330,9 @@ awful.screen.connect_for_each_screen(function(s)
             s.mypromptbox,
         },
         {
-             s.mytasklist, -- middle widget
-             widget = wibox.container.margin,
-             margins = beautiful.wibar_margins
+            s.mytasklist, -- middle widget
+            widget = wibox.container.margin,
+            margins = beautiful.wibar_margins
         },
         { -- right widgets
             layout = wibox.layout.fixed.horizontal,
@@ -489,15 +463,16 @@ root.keys(globalkeys)
 awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
-      properties = { border_width = beautiful.border_width,
-                     border_color = beautiful.border_normal,
-                     focus = awful.client.focus.filter,
-                     raise = true,
-                     keys = clientkeys,
-                     buttons = clientbuttons,
-                     screen = awful.screen.preferred,
-                     placement = awful.placement.no_overlap+awful.placement.no_offscreen
-     }
+        properties = {
+            border_width = beautiful.border_width,
+            border_color = beautiful.border_normal,
+            focus = awful.client.focus.filter,
+            raise = true,
+            keys = clientkeys,
+            buttons = clientbuttons,
+            screen = awful.screen.preferred,
+            placement = awful.placement.no_overlap+awful.placement.no_offscreen
+        }
     },
 
     -- Floating clients.
@@ -567,33 +542,31 @@ client.connect_signal("request::titlebars", function(c)
             awful.mouse.client.resize(c)
         end)
     )
-
-    awful.titlebar(c, {size = 24, }  ) : setup {
-    {    
-    { -- Left
+    awful.titlebar(c, {size = 24, } ) : setup {
+        {    
+            { -- Left
             awful.titlebar.widget.iconwidget(c),
             buttons = buttons,
             layout  = wibox.layout.fixed.horizontal
-        },
-        { -- Middle
-            { -- Title
+            },
+            { -- Middle
+                { -- Title
                 align  = "center",
                 widget = awful.titlebar.widget.titlewidget(c)
+                },
+                buttons = buttons,
+                layout  = wibox.layout.flex.horizontal,
             },
-            buttons = buttons,
-            layout  = wibox.layout.flex.horizontal,
-        },
-        { -- Right
-            awful.titlebar.widget.floatingbutton (c),
-            awful.titlebar.widget.maximizedbutton(c),
-            awful.titlebar.widget.stickybutton   (c),
-            awful.titlebar.widget.ontopbutton    (c),
-            awful.titlebar.widget.closebutton    (c),
-
-            layout = wibox.layout.fixed.horizontal()
-        },
+            { -- Right
+                awful.titlebar.widget.floatingbutton (c),
+                awful.titlebar.widget.maximizedbutton(c),
+                awful.titlebar.widget.stickybutton   (c),
+                awful.titlebar.widget.ontopbutton    (c),
+                awful.titlebar.widget.closebutton    (c),
+                layout = wibox.layout.fixed.horizontal()
+            },
         layout = wibox.layout.align.horizontal
-    },
+        },
     widget = wibox.container.margin,
     margins = 3,
     left = 5,
@@ -606,11 +579,11 @@ client.connect_signal("mouse::enter", function(c)
 end)
 
 client.connect_signal("focus", function(c) 
-        c.border_color = beautiful.border_focus 
-        end)
+    c.border_color = beautiful.border_focus 
+end)
 client.connect_signal("unfocus", function(c) 
-        c.border_color = beautiful.border_normal 
-        end)
+    c.border_color = beautiful.border_normal 
+end)
 -- }}}
 do
    awful.spawn("/home/drvilepis/.config/awesome/autorun.sh",false)

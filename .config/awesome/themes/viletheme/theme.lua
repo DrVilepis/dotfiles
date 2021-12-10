@@ -14,16 +14,22 @@ theme.font          = "JetBrainsMono Nerd Font Mono 9"
 
 -- Color variables
 
-theme.color1        = "#8C9440"
-theme.color2        = "#1f2419"
-theme.color3        = "#acb44a"
-theme.gray1         = "#0f140f"
-theme.gray2         = "#1f281c"
-theme.red1          = "#D72638"
+theme.color1        = "#665c54"
+theme.color2        = "#504945"
+theme.color3        = "#ebdbb2"
+theme.gray1         = "#1d2021"
+theme.gray2         = "#3c3836"
+
+theme.red           = "#fb4934"
+theme.orange        = "#fe8919"
+theme.cyan          = "#8ec07c"
+theme.blue          = "#83a598"
+theme.purple        = "#d3869b"
+theme.brown         = "#d65d0e"
 
 theme.bg_normal     = theme.gray1
 theme.bg_focus      = theme.color1
-theme.bg_urgent     = theme.red1
+theme.bg_urgent     = theme.red
 theme.bg_minimize   = "#0c0c0c"
 theme.bg_systray    = theme.color1
 
@@ -35,7 +41,6 @@ theme.fg_minimize   = theme.color3
 theme.accent        = theme.gray2
 
 theme.wibar_margins = 5
-
 theme.useless_gap   = 8
 theme.border_width  = 0
 theme.border_normal = theme.color2
@@ -52,13 +57,13 @@ theme.tasklist_fg_normal = theme.color3
 theme.tasklist_fg_focus  = theme.gray1
 theme.tasklist_bg_normal = theme.gray2
 theme.tasklist_bg_focus  = theme.color1
-theme.tasklist_bg_urgent = theme.red1
+theme.tasklist_bg_urgent = theme.red
 theme.tasklist_fg_urgent = "#222222"
 
 theme.taglist_bg_focus = theme.color1
-theme.taglist_bg_empty = "#4a4a4a"
+theme.taglist_bg_empty = "#414141"
 theme.taglist_bg_occupied = theme.color2
-theme.taglist_bg_urgent = theme.red1
+theme.taglist_bg_urgent = theme.red
 
 theme.menubar_fg_normal = theme.color3
 theme.menubar_bg_normal = theme.gray2
@@ -97,7 +102,8 @@ theme.titlebar_maximized_button_focus_inactive  = themes_path..current_theme.."/
 theme.titlebar_maximized_button_normal_active = themes_path..current_theme.."/titlebar/maximized_normal_active_dark.png"
 theme.titlebar_maximized_button_focus_active  = themes_path..current_theme.."/titlebar/maximized_focus_active_dark.png"
 
-theme.wallpaper = themes_path..current_theme.."/background.jpg"
+theme.wallpaper = "/home/drvilepis/wallpapers/leavesgruv.png"
+--theme.wallpaper = themes_path..current_theme.."/background.jpg"
 
 theme.layout_fairh = themes_path..current_theme.."/layouts/fairhw_dark.png"
 theme.layout_fairv = themes_path..current_theme.."/layouts/fairvw_dark.png"
