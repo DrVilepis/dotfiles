@@ -4,60 +4,62 @@ local lualine = require 'lualine'
 local colors = {
 	vertsplit       = '#181A1F',
 	special_grey    = '#555555',
-	menu_grey       = '#1f281c',
     cursor_grey     = '#2C323C',
     green1          = '#8c9440',
 	green2          = '#8c9440',
+    purple          = '#bb9af7',
+    orange          = '#d18046',
 	white           = '#bfc7d5',
 	green           = '#C3E88D',
 	green3          = '#8c9440',
 	green4          = '#8c9440',
-	red             = '#ff5370',
+	red             = 'dd6b72',
 	cyan            = '#89DDFF',
-	black           = '#1f281c',
+	black           = '#1a1a2a',
+	menu_grey       = '#353555',
 }
 
 
 -- Config
 local config = {
-  options = {
-    icons_enabled = true,
-    component_separators = {'', ''},
-    section_separators = {'', ''},
-    disabled_filetypes = {},
-    theme = {
-        normal = {
-            a = {fg = colors.black, bg = colors.green1, gui = 'bold'},
-            b = {fg = colors.green1, bg = colors.menu_grey},
-            c = {fg = colors.green1, bg = colors.black},
-            d = {fg = colors.green1, bg = colors.menu_grey},
-        },
-        insert = {
-            a = {fg = colors.black, bg = colors.green2, gui = 'bold'},
-            b = {fg = colors.green2, bg = colors.menu_grey},
-            c = {fg = colors.green2, bg = colors.black},
-            d = {fg = colors.green2, bg = colors.menu_grey},
-        },
-        visual = {
-            a = {fg = colors.black, bg = colors.green4, gui = 'bold'},
-            b = {fg = colors.green4, bg = colors.menu_grey},
-            c = {fg = colors.green4, bg = colors.black},
-            d = {fg = colors.green4, bg = colors.menu_grey},
-        },
-        replace = {
-            a = {fg = colors.black, bg = colors.green3, gui = 'bold'},
-            b = {fg = colors.green3, bg = colors.menu_grey},
-            c = {fg = colors.green3, bg = colors.black},
-            d = {fg = colors.green3, bg = colors.menu_grey},
-        },
-        inactive = {
-            a = {fg = colors.black, bg = colors.menu_grey, gui = 'bold'},
-            b = {fg = colors.black, bg = colors.menu_grey},
-            c = {fg = colors.black, bg = colors.menu_gray},
-            d = {fg = colors.black, bg = colors.menu_grey},
-        }
-    }
-  },
+    options = {
+        icons_enabled = true,
+        component_separators = {'', ''},
+        section_separators = {'', ''},
+        disabled_filetypes = {},
+        --[[ theme = {
+            normal = {
+                a = {fg = colors.black, bg = colors.purple, gui = 'bold'},
+                b = {fg = colors.purple, bg = colors.menu_grey},
+                c = {fg = colors.purple, bg = colors.black},
+                d = {fg = colors.purple, bg = colors.menu_grey},
+            },
+            insert = {
+                a = {fg = colors.black, bg = colors.orange, gui = 'bold'},
+                b = {fg = colors.orange, bg = colors.menu_grey},
+                c = {fg = colors.orange, bg = colors.black},
+                d = {fg = colors.orange, bg = colors.menu_grey},
+            },
+            visual = {
+                a = {fg = colors.black, bg = colors.red, gui = 'bold'},
+                b = {fg = colors.red, bg = colors.menu_grey},
+                c = {fg = colors.red, bg = colors.black},
+                d = {fg = colors.red, bg = colors.menu_grey},
+            },
+            replace = {
+                a = {fg = colors.black, bg = colors.green3, gui = 'bold'},
+                b = {fg = colors.green3, bg = colors.menu_grey},
+                c = {fg = colors.green3, bg = colors.black},
+                d = {fg = colors.green3, bg = colors.menu_grey},
+            },
+            inactive = {
+                a = {fg = colors.black, bg = colors.menu_grey, gui = 'bold'},
+                b = {fg = colors.black, bg = colors.menu_grey},
+                c = {fg = colors.black, bg = colors.menu_gray},
+                d = {fg = colors.black, bg = colors.menu_grey},
+            }
+        }]]--
+    },
     sections = {
         lualine_a = {'mode'},
         lualine_b = {'branch', 'diff'},

@@ -1,29 +1,71 @@
+function kb(s,k,a,o)
+    o = o or {noremap = true}
+    vim.api.nvim_set_keymap(s,k,a,o)
+end
+
+--vim.cmd([[
+--    map <up> <nop>
+--    map <down> <nop>
+--    map <left> <nop>
+--    map <right> <nop>
+--    imap <up> <nop>
+--    imap <down> <nop>
+--    imap <left> <nop>
+--    imap <right> <nop>
+--]])
+
+-- Finnish moment
+kb('','j','h')
+kb('','k','j')
+kb('','ö','l')
+kb('','l','k')
+
+kb('','J','H')
+kb('','K','J')
+kb('','Ö','L')
+kb('','L','K')
+
+kb('','<A-k>','<cmd>m .+1<CR>==', { noremap = true })
+kb('','<A-l>','<cmd>m .-2<CR>==', { noremap = true })
+
 -- Telescope keybinds
-vim.api.nvim_set_keymap('','ff','<cmd>Telescope find_files<CR>',{ noremap = true })
-vim.api.nvim_set_keymap('','fg','<cmd>Telescope live_grep<CR>',{ noremap = true })
-vim.api.nvim_set_keymap('','fb','<cmd>Telescope buffers<CR>',{ noremap = true })
-vim.api.nvim_set_keymap('','fh','<cmd>Telescope help_tags<CR>',{ noremap = true })
+kb('','<leader>ff','<cmd>Telescope find_files<CR>')
+kb('','<leader>fg','<cmd>Telescope live_grep<CR>')
+kb('','<leader>fb','<cmd>Telescope buffers<CR>')
+kb('','<leader>fh','<cmd>Telescope help_tags<CR>')
 
 -- NvimTree keybinds
-vim.api.nvim_set_keymap('','<C-n>','<cmd>NvimTreeToggle<CR>',{ noremap = true })
-vim.api.nvim_set_keymap('','nr','<cmd>NvimTreeRefresh<CR>',{ noremap = true })
-vim.api.nvim_set_keymap('','nn','<cmd>NvimTreeFindFile<CR>',{ noremap = true })
-vim.api.nvim_set_keymap('t','<Esc>','<C-\\><C-n>',{ noremap = true })
+kb('','<C-n>','<cmd>NvimTreeToggle<CR>')
+kb('','nr','<cmd>NvimTreeRefresh<CR>')
+kb('','nn','<cmd>NvimTreeFindFile<CR>')
+kb('t','<Esc>','<C-\\><C-n>')
 
 -- Bufferline keybinds
-vim.api.nvim_set_keymap('',']b','<cmd>BufferLineCycleNext<CR>',{ noremap = true })
-vim.api.nvim_set_keymap('','[b','<cmd>BufferLineCyclePrev<CR>',{ noremap = true })
-vim.api.nvim_set_keymap('','be','<cmd>BufferLineSortByExtension<CR>',{ noremap = true, silent = true })
-vim.api.nvim_set_keymap('','bd','<cmd>BufferLineSortByDirectory<CR>',{ noremap = true, silent = true })
+kb('','bö','<cmd>BufferLineCycleNext<CR>')
+kb('','bj','<cmd>BufferLineCyclePrev<CR>')
+kb('','bf','<cmd>BufferLinePick<CR>')
+kb('','bl','<cmd>BufferLineMoveNext<CR>')
+kb('','bk','<cmd>BufferLineMovePrev<CR>')
+kb('','be','<cmd>BufferLineSortByExtension<CR>',{ noremap = true, silent = true })
+kb('','bd','<cmd>BufferLineSortByDirectory<CR>',{ noremap = true, silent = true })
 
 -- Lsp keybinds
-vim.api.nvim_set_keymap('','<leader><space>','<cmd>lua vim.lsp.buf.hover()<CR>', { noremap = true })
+kb('','<leader><space>','<cmd>lua vim.lsp.buf.hover()<CR>')
+kb('','<leader>rn','<cmd>lua vim.lsp.buf.rename()<CR>')
 
 -- Rust related keybinds
-vim.api.nvim_set_keymap('','<leader>rh','<cmd>RustHoverRange<CR>',{ noremap = true })
-vim.api.nvim_set_keymap('','<leader>ru','<cmd>RustMoveItemUp<CR>',{ noremap = true })
-vim.api.nvim_set_keymap('','<leader>rd','<cmd>RustMoveItemDown<CR>',{ noremap = true })
-vim.api.nvim_set_keymap('','<leader>re','<cmd>RustExpandMacro<CR>',{ noremap = true })
-vim.api.nvim_set_keymap('','<leader>rr','<cmd>RustRunnables<CR>',{ noremap = true })
-vim.api.nvim_set_keymap('','<leader>rp','<cmd>RustParentModule<CR>',{ noremap = true })
+kb('','<leader>rh','<cmd>RustHoverRange<CR>')
+kb('','<leader>ra','<cmd>RustCodeAction<CR>')
+kb('','<leader>ru','<cmd>RustMoveItemUp<CR>')
+kb('','<leader>rd','<cmd>RustMoveItemDown<CR>')
+kb('','<leader>re','<cmd>RustExpandMacro<CR>')
+kb('','<leader>rr','<cmd>RustRunnables<CR>')
+kb('','<leader>rp','<cmd>RustParentModule<CR>')
 
+-- Trouble.nvim keybinds
+kb("n", "<leader>xx", "<cmd>Trouble<cr>",{silent = true, noremap = true})
+kb("n", "<leader>xw", "<cmd>Trouble lsp_workspace_diagnostics<cr>",{silent = true, noremap = true})
+kb("n", "<leader>xd", "<cmd>Trouble lsp_document_diagnostics<cr>",{silent = true, noremap = true})
+kb("n", "<leader>xl", "<cmd>Trouble loclist<cr>",{silent = true, noremap = true})
+kb("n", "<leader>xq", "<cmd>Trouble quickfix<cr>",{silent = true, noremap = true})
+kb("n", "gR", "<cmd>Trouble lsp_references<cr>",{silent = true, noremap = true})
