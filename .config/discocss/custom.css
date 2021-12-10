@@ -1,16 +1,25 @@
 :root {
     --vile-font-family: "JetBrainsMono Nerd Font Mono";
-    --vile-bg-dark: #0f140f;
-    --vile-bg-normal: #1f281c;
-    --vile-fg-focus: #ecf39e;
-    --vile-fg-normal: #acb44a;
+    --vile-bg-dark: #1d2021;
+    --vile-bg-normal: #3c3836;
+    --vile-fg-focus: #ebdbb2;
+    --vile-fg-normal: #b8bb26;
+
+    --vile-red: #fb4934;
+    --vile-orange: #fe8019;
+    --vile-yellow: #fabd2f;
+    --vile-green: #b8bb26;
+    --vile-cyan: #8ec07c;
+    --vile-blue: #83a598;
+    --vile-purple: #d3869b;
+    --vile-brown: #d65d0e;
 }
 
 .theme-dark {
-    --text-normal: var(--vile-fg-focus);
+    --text-normal: var(--vile-green);
     --text-muted: var(--vile-fg-normal);
 
-    --header-primary: var(--vile-fg-normal);
+    --header-primary: var(--vile-orange);
     --header-secondary: var(--vile-fg-focus);
 
     --background-primary: var(--vile-bg-dark);
@@ -30,12 +39,12 @@
     --background-modifier-active: rgba(79, 84, 92, 0.24);
     --background-modifier-accent: rgba(0, 0, 0, 0);
 
-    --interactive-normal: var(--vile-fg-normal);
-    --interactive-hover: var(--vile-fg-focus);
-    --interactive-active: var(--vile-fg-focus);
+    --interactive-normal: var(--vile-orange);
+    --interactive-hover: var(--vile-blue);
+    --interactive-active: var(--vile-purple);
     --interactive-muted: #666666;
 
-    --channels-default: var(--vile-fg-normal);
+    --channels-default: var(--vile-yellow);
     --channeltextarea-background: var(--vile-bg-normal);
 
     --scrollbar-thin-thumb: var(--vile-fg-normal);
@@ -156,3 +165,4 @@
     background-image: none !important;
     font-size: 10px !important;
 }
+
