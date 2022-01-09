@@ -36,16 +36,16 @@ kb('','<leader>fh','<cmd>Telescope help_tags<CR>')
 
 -- NvimTree keybinds
 kb('','<C-n>','<cmd>NvimTreeToggle<CR>')
-kb('','nr','<cmd>NvimTreeRefresh<CR>')
-kb('','nn','<cmd>NvimTreeFindFile<CR>')
+kb('','<leader>nr','<cmd>NvimTreeRefresh<CR>')
+kb('','<leader>nn','<cmd>NvimTreeFindFile<CR>')
 kb('t','<Esc>','<C-\\><C-n>')
 
 -- Bufferline keybinds
-kb('','bö','<cmd>BufferLineCycleNext<CR>')
-kb('','bj','<cmd>BufferLineCyclePrev<CR>')
+kb('','bl','<cmd>BufferLineCycleNext<CR>')
+kb('','bk','<cmd>BufferLineCyclePrev<CR>')
 kb('','bf','<cmd>BufferLinePick<CR>')
-kb('','bl','<cmd>BufferLineMoveNext<CR>')
-kb('','bk','<cmd>BufferLineMovePrev<CR>')
+kb('','bö','<cmd>BufferLineMoveNext<CR>')
+kb('','bj','<cmd>BufferLineMovePrev<CR>')
 kb('','be','<cmd>BufferLineSortByExtension<CR>',{ noremap = true, silent = true })
 kb('','bd','<cmd>BufferLineSortByDirectory<CR>',{ noremap = true, silent = true })
 

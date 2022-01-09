@@ -52,7 +52,7 @@ return require('packer').startup(function()
 	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
     -- use 'sainnhe/everforest'
     -- use "rafamadriz/neon"
-    use "norcalli/nvim-base16.lua"
+    use 'norcalli/nvim-base16.lua'
 
     -- Git utilities
     use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}}
@@ -61,6 +61,7 @@ return require('packer').startup(function()
     use 'lukas-reineke/indent-blankline.nvim'
     --use 'sindrets/diffview.nvim'
     use 'folke/trouble.nvim'
+
     if packer_bootstrap then
 		require('packer').sync()
     end

@@ -8,18 +8,26 @@ require('vile-lualine')
 
 -- Everforest colorscheme
 local base16 = require 'base16'
-base16(base16.themes["gruvbox-dark-hard"])
+local theme = base16.theme_from_array {
+    "242221"; "3c3835"; "524945"; "665c54";
+    "bdae93"; "d5c4a1"; "ebdbb2"; "fbf1c7";
+    "fb4934"; "fe8019"; "fabd2f"; "b8bb26";
+    "8ec07c"; "83a598"; "d3869b"; "d65d0e";
+}
+base16(theme, true)
 
 -- Coq autocompletion
 vim.g.coq_settings = { auto_start = 'shut-up' }
 require('coq')
 
-require'lspconfig'.hls.setup {}
-
 -- Rust-analyzer options
 -- require'lspconfig'.rust_analyzer.setup{}
 
 -- require('crates').setup {}
+--
+require'lspconfig'.elixirls.setup{
+    cmd = { "/home/drvilepis/elixir/language_server.sh" };
+}
 require('crates').setup()
 rust = require('rust-tools')
 rust.setup({
@@ -57,10 +65,14 @@ require('gitsigns').setup{}
 
 -- Treesitter for syntax highlighting
 vim.g.indent_blankline_use_treesitter = true
+vim.g.foldmethod=expr
 require'nvim-treesitter.configs'.setup {
     highlight = {
         enable = true,
     },
+    indent = {
+        enable = true,
+    }
 }
 
 vim.cmd [[highlight indent1 guifg=#E06C75 gui=nocombine]]
