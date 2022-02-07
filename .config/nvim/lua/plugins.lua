@@ -49,7 +49,7 @@ return require('packer').startup(function()
     }
  
     -- Syntax highlighting and colorscheme
-	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
     -- use 'sainnhe/everforest'
     -- use "rafamadriz/neon"
     use 'norcalli/nvim-base16.lua'

@@ -3,30 +3,19 @@ function kb(s,k,a,o)
     vim.api.nvim_set_keymap(s,k,a,o)
 end
 
---vim.cmd([[
---    map <up> <nop>
---    map <down> <nop>
---    map <left> <nop>
---    map <right> <nop>
---    imap <up> <nop>
---    imap <down> <nop>
---    imap <left> <nop>
---    imap <right> <nop>
---]])
-
 -- Finnish moment
 kb('','j','h')
 kb('','k','j')
 kb('','ö','l')
 kb('','l','k')
 
-kb('','J','H')
-kb('','K','J')
-kb('','Ö','L')
-kb('','L','K')
+kb('','j','h')
+kb('','k','j')
+kb('','ö','l')
+kb('','l','k')
 
-kb('','<A-k>','<cmd>m .+1<CR>==', { noremap = true })
-kb('','<A-l>','<cmd>m .-2<CR>==', { noremap = true })
+--kb('','<A-k>','<cmd>m .+1<CR>==', { noremap = true })
+--kb('','<A-l>','<cmd>m .-2<CR>==', { noremap = true })
 
 -- Telescope keybinds
 kb('','<leader>ff','<cmd>Telescope find_files<CR>')

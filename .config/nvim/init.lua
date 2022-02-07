@@ -17,18 +17,18 @@ local theme = base16.theme_from_array {
 base16(theme, true)
 
 -- Coq autocompletion
-vim.g.coq_settings = { auto_start = 'shut-up' }
+vim.g.coq_settings = { auto_start = 'shut-up' , keymap = { eval_snips = '<leader>j'}}
 require('coq')
 
 -- Rust-analyzer options
 -- require'lspconfig'.rust_analyzer.setup{}
 
--- require('crates').setup {}
+require('crates').setup {}
 --
 require'lspconfig'.elixirls.setup{
     cmd = { "/home/drvilepis/elixir/language_server.sh" };
 }
-require('crates').setup()
+require'lspconfig'.clangd.setup{}
 rust = require('rust-tools')
 rust.setup({
     tools = {
@@ -64,8 +64,8 @@ require'nvim-web-devicons'.setup {
 require('gitsigns').setup{}
 
 -- Treesitter for syntax highlighting
-vim.g.indent_blankline_use_treesitter = true
-vim.g.foldmethod=expr
+--vim.g.indent_blankline_use_treesitter = true
+vim.g.foldmethod = expr
 require'nvim-treesitter.configs'.setup {
     highlight = {
         enable = true,
@@ -103,25 +103,26 @@ require('bufferline').setup {
         custom_areas = {
             right = function()
                 local result = {}
-                local error = vim.lsp.diagnostic.get_count(0, [[Error]])
-                local warning = vim.lsp.diagnostic.get_count(0, [[Warning]])
-                local info = vim.lsp.diagnostic.get_count(0, [[Information]])
-                local hint = vim.lsp.diagnostic.get_count(0, [[Hint]])
+                local seve = vim.diagnostic.severity
+                local error = #vim.diagnostic.get(0, {severity = seve.ERROR})
+                local warning = #vim.diagnostic.get(0, {severity = seve.WARN})
+                local info = #vim.diagnostic.get(0, {severity = seve.INFO})
+                local hint = #vim.diagnostic.get(0, {severity = seve.HINT})
 
                 if error ~= 0 then
-                    table.insert(result, {text = "  " .. error, guifg = "#EC5241"})
+                  table.insert(result, {text = "  " .. error, guifg = "#EC5241"})
                 end
 
                 if warning ~= 0 then
-                    table.insert(result, {text = "  " .. warning, guifg = "#EFB839"})
+                  table.insert(result, {text = "  " .. warning, guifg = "#EFB839"})
                 end
 
                 if hint ~= 0 then
-                    table.insert(result, {text = "  " .. hint, guifg = "#A3BA5E"})
+                  table.insert(result, {text = "  " .. hint, guifg = "#A3BA5E"})
                 end
 
                 if info ~= 0 then
-                    table.insert(result, {text = "  " .. info, guifg = "#7EA9A7"})
+                  table.insert(result, {text = "  " .. info, guifg = "#7EA9A7"})
                 end
                 return result
             end,
