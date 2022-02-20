@@ -1,8 +1,24 @@
 (module dots.plugins.lspconfig
   {autoload {a aniseed.core
-             lsp lspconfig}})
+             lsp lspconfig
+             cmp_lsp cmp_nvim_lsp}})
 
-(lsp.clangd.setup {})
+(def default-capabilities
+  (let [capabilities (vim.lsp.protocol.make_client_capabilities)]
+    (set capabilities.textDocument.completion.completionItem.snippetSupport true)
+    (cmp_lsp.update_capabilities capabilities)))
 
-(lsp.elixirls.setup 
-  {:cmd ["~/elixir/language_server.sh"]})
+(fn init-lsp [lsp-name ?opts]
+  (let [merged-opts (a.merge {:on_attach on_attach :capabilities default-capabilities} (or ?opts {}))]
+    ((. lsp lsp-name :setup) merged-opts)))
+
+(init-lsp :clangd)
+(init-lsp :elixirls {:cmd ["~/elixir/language_server.sh"]})
+(init-lsp :hls {:single_file_support true})
+(init-lsp :asm_lsp)
+
+(let [rust-tools (require "rust-tools")]
+  (rust-tools.setup {:tools {:inlay_hints {:show_parameter_hints false}
+                             :autoSetHints false}
+                     :server {:on_attach on_attach
+                              :capabilities default-capabilities}}))

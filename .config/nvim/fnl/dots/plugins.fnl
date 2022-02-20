@@ -13,11 +13,10 @@
 (defn use [...]
   (let [pkgs [...]]
     (packer.startup
-      (fn [use]
+      {1 (fn [use]
         (for [i 1 (a.count pkgs) 2]
           (let [name (. pkgs i)
                 opts (. pkgs (+ i 1))]
             (-?> (. opts :mod) (safe-require-plugin-config))
-            (use (a.assoc opts 1 name)))))))
-
-  nil)
+            (use (a.assoc opts 1 name)))))
+       :config {:compile_path (.. (vim.fn.stdpath "config") "/lua/packer_compiled.lua")}})))

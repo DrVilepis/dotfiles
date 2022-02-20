@@ -34,7 +34,7 @@
 (map :n "<leader>rp" "<cmd>RustParentModule<CR>")
 
 ;; Gitsigns
-(map "n"  "<leader>hb"  "<cmd>lua require"gitsigns".blame_line{full=true}<CR>")
+(map :n  "<leader>hb" "<cmd>lua require'gitsigns'.blame_line{full=true}<CR>")
 
 ;; Trouble.nvim keybinds
 (map :n "<leader>xx"  "<cmd>Trouble<cr>" {:noremap true :silent true})
