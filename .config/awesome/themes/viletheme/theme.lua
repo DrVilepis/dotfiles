@@ -14,59 +14,68 @@ theme.font          = "JetBrainsMono Nerd Font Mono 9"
 
 -- Color variables
 
-theme.color1        = "#665c54"
-theme.color2        = "#504945"
-theme.color3        = "#ebdbb2"
-theme.gray1         = "#1d2021"
-theme.gray2         = "#3c3836"
+theme.color1        = "#252221"
+theme.color2        = "#302c2b"
+theme.color3        = "#3d3837"
+theme.color4        = "#413c3a"
+theme.color5        = "#d1c6b4"
+theme.color6        = "#beae94"
 
 theme.red           = "#fb4934"
 theme.orange        = "#fe8919"
-theme.cyan          = "#8ec07c"
-theme.blue          = "#83a598"
-theme.purple        = "#d3869b"
-theme.brown         = "#d65d0e"
+theme.yellow        = "#fabd2f"
+theme.green         = "#b8bb26"
+theme.cyan          = "#7cbfaa"
+theme.blue          = "#7984b3"
+theme.purple        = "#b788db"
+theme.brown         = "#d65d03"
 
-theme.bg_normal     = theme.gray1
-theme.bg_focus      = theme.color1
+theme.bg_normal     = theme.color1
+theme.bg_focus      = theme.color3
 theme.bg_urgent     = theme.red
 theme.bg_minimize   = "#0c0c0c"
-theme.bg_systray    = theme.color1
+theme.bg_systray    = theme.color3
 
-theme.fg_normal     = theme.color3
-theme.fg_focus      = theme.gray2
-theme.fg_urgent     = theme.color1
-theme.fg_minimize   = theme.color3
+theme.fg_normal     = theme.color5
+theme.fg_focus      = theme.color2
+theme.fg_urgent     = theme.color3
+theme.fg_minimize   = theme.color5
 
-theme.accent        = theme.gray2
+theme.accent        = theme.color2
 
-theme.wibar_margins = 5
-theme.useless_gap   = 8
-theme.border_width  = 0
-theme.border_normal = theme.color2
-theme.border_focus  = theme.color1
-theme.border_marked = theme.color3
+theme.wibar_height = 36
+theme.wibar_margins = 6
+theme.useless_gap   = 4
+theme.border_width  = 2
+theme.border_normal = theme.color4
+theme.border_focus  = theme.color3
+theme.border_marked = theme.color5
 
-theme.titlebar_enabled = true
-theme.titlebar_bg_normal = theme.color2
-theme.titlebar_bg_focus = theme.color1
-theme.titlebar_fg_focus = theme.gray1
-theme.titlebar_fg_normal = theme.gray1
+theme.titlebar_enabled = false
+theme.titlebar_bg_normal = theme.color3
+theme.titlebar_bg_focus = theme.color4
+theme.titlebar_fg_focus = theme.color5
+theme.titlebar_fg_normal = theme.color5
 
-theme.tasklist_fg_normal = theme.color3
-theme.tasklist_fg_focus  = theme.gray1
-theme.tasklist_bg_normal = theme.gray2
-theme.tasklist_bg_focus  = theme.color1
+theme.tasklist_fg_normal = theme.color5
+theme.tasklist_fg_focus  = theme.color5
+theme.tasklist_bg_normal = theme.color3
+theme.tasklist_bg_focus  = theme.color4
 theme.tasklist_bg_urgent = theme.red
 theme.tasklist_fg_urgent = "#222222"
 
-theme.taglist_bg_focus = theme.color1
-theme.taglist_bg_empty = "#414141"
-theme.taglist_bg_occupied = theme.color2
+theme.taglist_bg_focus = theme.green
+theme.taglist_bg_empty = theme.color4
+theme.taglist_bg_occupied = theme.blue
 theme.taglist_bg_urgent = theme.red
 
-theme.menubar_fg_normal = theme.color3
-theme.menubar_bg_normal = theme.gray2
+theme.menubar_fg_normal = theme.color5
+theme.menubar_bg_normal = theme.color2
+
+theme.slider_bar_width = 4
+theme.slider_handle_shape = gears.shape.circle
+theme.slider_handle_color = theme.color5
+theme.slider_bar_color = theme.color1
 
 theme.fullscreen_hide_border = true
 
@@ -102,7 +111,7 @@ theme.titlebar_maximized_button_focus_inactive  = themes_path..current_theme.."/
 theme.titlebar_maximized_button_normal_active = themes_path..current_theme.."/titlebar/maximized_normal_active_dark.png"
 theme.titlebar_maximized_button_focus_active  = themes_path..current_theme.."/titlebar/maximized_focus_active_dark.png"
 
-theme.wallpaper = "/home/drvilepis/wallpapers/leavesgruv.png"
+theme.wallpaper = "/home/drvilepis/wallpapers/haskell.png"
 --theme.wallpaper = themes_path..current_theme.."/background.jpg"
 
 theme.layout_fairh = themes_path..current_theme.."/layouts/fairhw_dark.png"
@@ -123,10 +132,7 @@ theme.layout_cornersw = themes_path..current_theme.."/layouts/cornersww_dark.png
 theme.layout_cornerse = themes_path..current_theme.."/layouts/cornersew_dark.png"
 
 -- Generate Awesome icon:
-theme.awesome_icon = theme_assets.awesome_icon(
-    theme.menu_height * 2, theme.color1, theme.gray1
-)
-
+theme.menu_icon = "/home/drvilepis/personal/icons/haskell.png"
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 theme.icon_theme = nil

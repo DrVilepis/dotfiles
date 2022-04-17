@@ -1,7 +1,6 @@
 (module dots.plugins.cmp
   {autoload {a aniseed.core
              cmp cmp
-             cmp cmp
              luasnip luasnip}})
 
 (cmp.setup

@@ -1,26 +1,27 @@
 :root {
     --vile-font-family: "JetBrainsMono Nerd Font Mono";
-    --vile-bg-dark: #1d2021;
-    --vile-bg-normal: #3c3836;
-    --vile-fg-focus: #ebdbb2;
-    --vile-fg-normal: #b8bb26;
+    --vile-bg-dark: #252221;
+    --vile-bg-normal: #302c2b;
+    --vile-fg-focus: #d1c6b4;
+    --vile-fg-normal: #beae94;
 
     --vile-red: #fb4934;
     --vile-orange: #fe8019;
     --vile-yellow: #fabd2f;
     --vile-green: #b8bb26;
-    --vile-cyan: #8ec07c;
-    --vile-blue: #83a598;
-    --vile-purple: #d3869b;
+    --vile-cyan: #7cbfaa;
+    --vile-blue: #7984b3;
+    --vile-purple: #b788cb;
     --vile-brown: #d65d0e;
 }
 
 .theme-dark {
-    --text-normal: var(--vile-green);
+    --text-normal: var(--vile-fg-focus);
     --text-muted: var(--vile-fg-normal);
 
-    --header-primary: var(--vile-orange);
+    --header-primary: var(--vile-yellow);
     --header-secondary: var(--vile-fg-focus);
+    --channel-icon: var(--vile-cyan);
 
     --background-primary: var(--vile-bg-dark);
     --background-secondary: var(--vile-bg-normal);
@@ -39,12 +40,12 @@
     --background-modifier-active: rgba(79, 84, 92, 0.24);
     --background-modifier-accent: rgba(0, 0, 0, 0);
 
-    --interactive-normal: var(--vile-orange);
-    --interactive-hover: var(--vile-blue);
-    --interactive-active: var(--vile-purple);
+    --interactive-normal: var(--vile-fg-normal);
+    --interactive-hover: var(--vile-fg-normal);
+    --interactive-active: var(--vile-green);
     --interactive-muted: #666666;
 
-    --channels-default: var(--vile-yellow);
+    --channels-default: var(--vile-fg-normal);
     --channeltextarea-background: var(--vile-bg-normal);
 
     --scrollbar-thin-thumb: var(--vile-fg-normal);
@@ -64,7 +65,7 @@
 
 /* Font Settings */
 * {
-    font-family: "JetBrainsMono Nerd Font Mono" !important;
+    font-family: var(--vile-font-family) !important;
 }
 
 [class*="sidebar"] [class*="containerDefault"] [class*="mainContent"] {

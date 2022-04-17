@@ -1,9 +1,8 @@
 (module dots.plugins.treesitter
   {autoload {a aniseed.core
-             treesitter nvim-treesitter}})
+             treesitter "nvim-treesitter.configs"}})
 
 (treesitter.setup
-  {:highlight
-   {:enable true}
-   :indent
-   {:enable true}})
+  {:ensure_installed [:rust]
+   :highlight {:enable true}
+   :indent {:enable true}})

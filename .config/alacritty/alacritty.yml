@@ -23,15 +23,15 @@ font:
     family: JetBrainsMono Nerd Font Mono
     style: Bold Italic
 
-  size: 9
+  size: 10
 
 # Colors
 schemes:
-  gruvbox-hard: &gruvbox-hard
+  viletheme: &viletheme
   # Default colors
     primary:
-      background: '0x1d2021'
-      foreground: '0xd5c4a1'
+      background: '0x252221'
+      foreground: '0xd1c6b4'
 
     # Colors the cursor will use if `custom_cursor_colors` is true
     cursor:
@@ -40,25 +40,25 @@ schemes:
 
     # Normal colors
     normal:
-      black:   '0x1d2021'
+      black:   '0x252221'
       red:     '0xfb4934'
       green:   '0xb8bb26'
       yellow:  '0xfabd2f'
-      blue:    '0x83a598'
-      magenta: '0xd3869b'
-      cyan:    '0x8ec07c'
-      white:   '0xd5c4a1'
+      blue:    '0x7984b3'
+      magenta: '0xb788db'
+      cyan:    '0x7cbfaa'
+      white:   '0xd1c6b4'
 
     # Bright colors
     bright:
-      black:   '0x665c54'
-      red:     '0xfe8019'
-      green:   '0x3c3836'
-      yellow:  '0x504945'
-      blue:    '0xbdae93'
-      magenta: '0xebdbb2'
-      cyan:    '0xd65d0e'
-      white:   '0xfbf1c7'
+      black:   '0x252221'
+      red:     '0xfb4934'
+      green:   '0xb8bb26'
+      yellow:  '0xfabd2f'
+      blue:    '0x7984b3'
+      magenta: '0xb788db'
+      cyan:    '0x7cbfaa'
+      white:   '0xd1c6b4'
     draw_bold_text_with_bright_colors: false
 
   everforest_dark: &everforest_dark
@@ -105,5 +105,30 @@ schemes:
       magenta: '0xb294bb'
       cyan:    '0x8abeb7'
       white:   '0xc5c8c6'
-colors: *gruvbox-hard
-background_opacity: 1
+  nord: &nord
+    primary:
+      background: '0x2e3440'
+      foreground: '0xe5e9f0'
+    cursor:
+      text: '0x2e3440'
+      cursor: '0xe5e9f0'
+    normal:
+      black:   '0x2e3440'
+      red:     '0xbf616a'
+      green:   '0xa3be8c'
+      yellow:  '0xebcb8b'
+      blue:    '0x81a1c1'
+      magenta: '0xb48ead'
+      cyan:    '0x88c0d0'
+      white:   '0xe5e9f0'
+    bright:
+      black:   '0x4c566a'
+      red:     '0xd08770'
+      green:   '0x3b4252'
+      yellow:  '0x434c5e'
+      blue:    '0xd8dee9'
+      magenta: '0xeceff4'
+      cyan:    '0x5e81ac'
+      white:   '0x8fbcbb'
+    draw_bold_text_with_bright_colors: false
+colors: *viletheme

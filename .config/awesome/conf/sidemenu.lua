@@ -1,6 +1,6 @@
 local dpi = beautiful.xresources.apply_dpi
 
-local box = function(w)
+local function box(w)
     return {
         {    
             {
@@ -20,15 +20,41 @@ local box = function(w)
     }
 end
 
-local command = function(c,t,i)
+local function command(c,t)
     return awful.widget.watch(c,t,function(widget,stdout)
         widget:set_text(stdout:sub(1,-2))
     end)
 end
 
-local sidemenu = function(s)
+--[[ local function volume_widget()
+    local volume = tonumber(io.popen("pamixer --get-volume"):read("*a"))
+    local widget = wibox.widget {
+        box({
+            id = 'volume',
+            widget = wibox.widget.textbox,
+            text = "Volume: " .. string.format("%03d",volume),
+        }),
+        box({
+            id = 'slider',
+            widget = wibox.widget.slider,
+            bar_height = 4,
+            minimum = 0,
+            maximum = 100,
+            handle_width = 20,
+            value = volume,
+            forced_height = 20,
+        }),
+        layout = wibox.layout.align.horizontal,
+    }
+    widget:get_children_by_id('slider')[1]:connect_signal("widget::redraw_needed",function(w)
+        awful.spawn("pamixer --set-volume " .. w.value)
+        widget:get_children_by_id('volume')[1].text = "Volume: " .. string.format("%03d",w.value)
+    end)
+    return widget
+end ]]--
+
+local function sidemenu(s)
     menu = wibox {
-        screen = s,
         x = s.geometry.x,
         y = s.geometry.y + 42,
         width = 500,
@@ -45,45 +71,13 @@ local sidemenu = function(s)
             layout = wibox.layout.fixed.vertical,
             box(awful.widget.textclock("%A %B | %T %F | %::z")),
             {
+                name = "dick",
                 box(command("/bin/sh -c ~/scripts/covid-data",1800)),
                 box(command("/bin/sh -c ~/scripts/weather-extra", 1800)),
                 layout = wibox.layout.flex.horizontal,
             },
-            {
-                {
-                    box(command("/bin/sh -c 'echo \"kernel: $(uname -r)\"'")),
-                    box(command("/bin/sh -c 'echo \"packages: $(pacman -Q | wc -l)\"'")),
-                    layout = wibox.layout.align.vertical,
-                },
-                box({
-                    command("/bin/sh -c ~/scripts/disk-usage", 600),
-                    command("/bin/sh -c ~/scripts/disk-usage-home", 600),
-                    command("/bin/sh -c ~/scripts/disk-usage-games", 600),
-                    layout = wibox.layout.align.vertical,
-                }),
-                layout = wibox.layout.flex.horizontal,
-            },
-            {
-                box(wibox.widget.textbox("AwesomeWM " .. awesome.version)),
-                box(wibox.widget.textbox("Hostname: " .. awesome.hostname)),
-                box(wibox.widget.textbox("Shell: " .. awful.util.shell)),
-                layout = wibox.layout.flex.horizontal,
-            },
             box(command("/bin/sh -c 'echo \"Uptime: $(~/scripts/uptime-clean)\"'", 1)),
-            {
-                box(command("/bin/sh -c 'ps -eo comm:26,%cpu --sort=-%cpu | head -n5'",1)),
-                box(command("/bin/sh -c 'ps -eo comm:26,%mem --sort=-%mem | head -n5'",1)),
-                layout = wibox.layout.flex.horizontal,
-            },
-            {
-                {
-                    box(command([[/bin/sh -c "curl -s https://koira.testausserveri.fi/api/guildInfo | grep -Po '(?<=\"memberCount\":)\d*'"]], 600)),
-                    box(command([[/bin/sh -c "curl -s https://koira.testausserveri.fi/api/guildInfo | grep -Po '(?<=\"messagesToday\":)\d*'"]], 300)),
-                    layout = wibox.layout.flex.vertical,
-                },
-                box(command([[/bin/sh -c "pacman -Qu | wc -l"]], 300)),
-                layout = wibox.layout.flex.horizontal,
-            },
+            --volume_widget(),
         },
         widget = wibox.container.margin,
         margins = 6,

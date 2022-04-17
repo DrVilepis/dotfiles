@@ -25,6 +25,7 @@
 (map :n "<leader>rn" "<cmd>lua vim.lsp.buf.rename()<CR>")
 
 ;; Rust related keybinds
+(map :n "<leader>rs" "<cmd>RustStartStandaloneServerForBuffer<CR>")
 (map :n "<leader>rh" "<cmd>RustHoverRange<CR>")
 (map :n "<leader>ra" "<cmd>RustCodeAction<CR>")
 (map :n "<leader>ru" "<cmd>RustMoveItemUp<CR>")
@@ -34,7 +35,23 @@
 (map :n "<leader>rp" "<cmd>RustParentModule<CR>")
 
 ;; Gitsigns
-(map :n  "<leader>hb" "<cmd>lua require'gitsigns'.blame_line{full=true}<CR>")
+(map :n "<leader>hs" ":Gitsigns stage_hunk<CR>")
+(map :v "<leader>hs" ":Gitsigns stage_hunk<CR>")
+(map :n "<leader>hr" ":Gitsigns reset_hunk<CR>")
+(map :v "<leader>hr" ":Gitsigns reset_hunk<CR>")
+(map :n "<leader>hS" "<cmd>Gitsigns stage_buffer<CR>")
+(map :n "<leader>hu" "<cmd>Gitsigns undo_stage_hunk<CR>")
+(map :n "<leader>hR" "<cmd>Gitsigns reset_buffer<CR>")
+(map :n "<leader>hp" "<cmd>Gitsigns preview_hunk<CR>")
+(map :n "<leader>hb" "<cmd>lua require'gitsigns'.blame_line{full=true}<CR>")
+(map :n "<leader>tb" "<cmd>Gitsigns toggle_current_line_blame<CR>")
+(map :n "<leader>hd" "<cmd>Gitsigns diffthis<CR>")
+(map :n "<leader>hD" "<cmd>lua require'gitsigns'.diffthis('~')<CR>")
+(map :n "<leader>td" "<cmd>Gitsigns toggle_deleted<CR>")
+
+(map :n "<leader>n" ":Neogit<CR>")
+
+(map :n "<leader>rf" ":RustFmt<CR>")
 
 ;; Trouble.nvim keybinds
 (map :n "<leader>xx"  "<cmd>Trouble<cr>" {:noremap true :silent true})

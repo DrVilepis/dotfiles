@@ -120,6 +120,11 @@ globalkeys = gears.table.join(
         }
     end,
     {description = "move cursor to top-left corner", group = "utils"}),
+    awful.key({ modkey, "Shift" }, "e",
+    function(c)
+        awful.util.spawn([[/bin/sh -c 'qalc -t "$(xclip -sel c -o)" | tr -d "\n" | xclip -sel c']], false)
+    end,
+    {description = "move cursor to top-left corner", group = "utils"}),
     awful.key({ modkey,"Shift"}, "r",
         function(s) awful.spawn('/bin/sh -c "$HOME/scripts/termless_scriptrunner"') end,
         {description="show help", group="awesome"}),

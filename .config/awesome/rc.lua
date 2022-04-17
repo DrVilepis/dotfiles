@@ -15,7 +15,6 @@ beautiful = require("beautiful")
 naughty = require("naughty")
 menubar = require("menubar")
 hotkeys_popup = require("awful.hotkeys_popup")
-local bling = require("bling")
 require("awful.hotkeys_popup.keys")
 
 -- {{{ Error handling
@@ -67,7 +66,7 @@ awful.layout.layouts = {
     -- awful.layout.suit.fair.horizontal,
     -- awful.layout.suit.spiral,
     -- awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
+    -- awful.layout.suit.max,
     -- awful.layout.suit.max.fullscreen,
     -- awful.layout.suit.magnifier,
     -- awful.layout.suit.corner.nw,
@@ -82,7 +81,7 @@ awful.layout.layouts = {
 mymainmenu = require('conf.awesomemenu')()
 
 mylauncher = awful.widget.launcher({ 
-    image = beautiful.awesome_icon,                                 
+    image = beautiful.menu_icon,                                 
     menu = mymainmenu,
     widget_template = {
         {
@@ -166,7 +165,7 @@ local rounded_box = function(w)
         {
             w,
             widget = wibox.container.background,
-            shape = gears.shape.rounded_rect,
+            shape = gears.shape.rect,
             bg = beautiful.accent
         },
     widget = wibox.container.margin,
@@ -224,27 +223,6 @@ awful.screen.connect_for_each_screen(function(s)
         s.sidemenu = require('conf.sidemenu')(s)
     end
 
-    if(s.index == screen.primary.index) then
-
-        local ww = 700;
-        local wh = 1;
-
-        s.greeter = wibox {
-            screen = s,
-            x = s.geometry.x + (s.geometry.width - ww) / 2,
-            y = s.geometry.y + (s.geometry.height - wh) / 2,
-            width = ww,
-            height = wh,
-            visible = false,
-            ontop = false,
-            bg = beautiful.bg_normal,
-            shape = function(cr,w,h) 
-                gears.shape.rounded_rect(cr,w,h)
-            end
-        }
-    end
-
-
     -- create a taglist widget
     s.mytaglist = awful.widget.taglist {
         screen  = s,
@@ -278,27 +256,17 @@ awful.screen.connect_for_each_screen(function(s)
         buttons = tasklist_buttons,
         style   = {
             spacing = 8,
-            shape = gears.shape.rounded_rect,
+            shape = gears.shape.rect,
         },
         widget_template = {
             {
-                {
-                    {
-                    id = 'icon_role',
-                    widget = wibox.widget.imagebox,
-                    },
-                    widget = wibox.container.margin,
-                    left = 10,
-                    top = 3,
-                    bottom = 3,
-                },
                 {
                     {
                         id  = "text_role",
                         widget  = wibox.widget.textbox,
                     },
                     widget = wibox.container.margin,
-                    left = 6
+                    margins = 5,
                 },
                 layout = wibox.layout.fixed.horizontal,
             },
@@ -311,7 +279,9 @@ awful.screen.connect_for_each_screen(function(s)
     s.mywibox = awful.wibar({ 
         position = "top",
         screen = s,
-        height = 34,
+        height = beautiful.wibar_height,
+        border_width = 2,
+        border_color = beautiful.color3,
         visible = true,
     })
 
@@ -321,7 +291,11 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         { -- left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
+            {
+                mylauncher,
+                widget = wibox.container.margin,
+                margins = beautiful.wibar_margins,
+            },
             rounded_box({
                 s.mytaglist,
                 widget = wibox.container.margin,
@@ -362,13 +336,13 @@ awful.screen.connect_for_each_screen(function(s)
                                 layout = wibox.layout.fixed.horizontal,    
                             },
                             widget = wibox.container.margin,
-                            left = 10,
-                            right = 10,
+                            left = 6,
+                            right = 6,
                         },
                         widget = wibox.container.background,
                         fg = "#ffff00",
                         bg = beautiful.bg_focus,
-                        shape = gears.shape.rounded_rect,
+                        shape = gears.shape.rect,
                     },
                     widget = wibox.container.margin,
                     margins = beautiful.wibar_margins,
@@ -532,7 +506,7 @@ end)
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
 client.connect_signal("request::titlebars", function(c)
     -- buttons for the titlebar
-    local buttons = gears.table.join(
+    --[[ local buttons = gears.table.join(
         awful.button({ }, 1, function()
             c:emit_signal("request::activate", "titlebar", {raise = true})
             awful.mouse.client.move(c)
@@ -541,35 +515,19 @@ client.connect_signal("request::titlebars", function(c)
             c:emit_signal("request::activate", "titlebar", {raise = true})
             awful.mouse.client.resize(c)
         end)
-    )
+    )]]--
     awful.titlebar(c, {size = 24, } ) : setup {
-        {    
-            { -- Left
-            awful.titlebar.widget.iconwidget(c),
-            buttons = buttons,
-            layout  = wibox.layout.fixed.horizontal
-            },
-            { -- Middle
-                { -- Title
+        {            
+            { -- Title
                 align  = "center",
                 widget = awful.titlebar.widget.titlewidget(c)
-                },
-                buttons = buttons,
-                layout  = wibox.layout.flex.horizontal,
             },
-            { -- Right
-                awful.titlebar.widget.floatingbutton (c),
-                awful.titlebar.widget.maximizedbutton(c),
-                awful.titlebar.widget.stickybutton   (c),
-                awful.titlebar.widget.ontopbutton    (c),
-                awful.titlebar.widget.closebutton    (c),
-                layout = wibox.layout.fixed.horizontal()
-            },
-        layout = wibox.layout.align.horizontal
+            buttons = buttons,
+            layout  = wibox.layout.flex.horizontal,
         },
-    widget = wibox.container.margin,
-    margins = 3,
-    left = 5,
+        widget = wibox.container.margin,
+        margins = 3,
+        left = 5,
     }
 end)
 
