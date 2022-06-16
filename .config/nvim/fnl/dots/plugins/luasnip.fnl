@@ -11,7 +11,7 @@
                          ["#[macro_export]"
                           "macro_rules! readints {"
                           "    ($x:ident,$y:ident) => {{"
-                          "        x.read_line(&mut$y).unwrap();"
+                          "        $x.read_line(&mut $y).unwrap();"
                           "        let nums = $y"
                           "            .trim()"
                           "            .split_whitespace()"
@@ -35,6 +35,23 @@
                           "            .any(|i| n % i == 0),"
                           "    }"
                           "}"])])
+     (luasnip.snippet "generate_primes"
+                      [(luasnip.text_node 
+                         [
+                          "fn generate_primes(n: usize) -> Vec<usize> {"
+                          "    let mut nums = vec![true; n];"
+                          "    (2..n).step_by(2).for_each(|n| nums[n] = false);"
+                          "    let mut primes = vec![2];"
+                          "    (3..nums.len()).fold(2, |mut p, i| {"
+                          "        if nums[i] {"
+                          "            primes.push(i);"
+                          "            p = i * i;"
+                          "            (p..n).step_by(p).for_each(|n| nums[n] = false);"
+                          "        }"
+                          "        p"
+                          "    });"
+                          "    primes"
+                          "}" ])])
      (luasnip.snippet "mainstdin"
                       [(luasnip.text_node
                          ["fn main() {"

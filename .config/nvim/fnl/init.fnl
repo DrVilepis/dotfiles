@@ -89,6 +89,8 @@
   :tpope/vim-surround {}
   :wellle/targets.vim {}
   :jghauser/mkdir.nvim {}
+  :nkakouros-original/numbers.nvim {:mod :numbers}
+
 
   ;; Testaustime
   :lajp/testaustime-nvim {:run "cabal install --overwrite-policy=always"}

@@ -47,9 +47,9 @@ theme.wibar_height = 36
 theme.wibar_margins = 6
 theme.useless_gap   = 4
 theme.border_width  = 2
-theme.border_normal = theme.color4
+theme.border_normal = theme.color3
 theme.border_focus  = theme.color3
-theme.border_marked = theme.color5
+theme.border_marked = theme.color3
 
 theme.titlebar_enabled = false
 theme.titlebar_bg_normal = theme.color3

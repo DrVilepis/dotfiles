@@ -42,13 +42,14 @@
                                            (table.concat 
                                              (icollect [_ val (pairs lsp)] (. val :name)) " & ")
                                            "None"))))]
-                :lualine_c [:branch :diff]
+                :lualine_c [:filename :branch :diff]
                 :lualine_x [:encoding :fileformat]
-                :lualine_y [:filetype]
+                :lualine_y [(fn [] (.. "Line count: " (. (nvim.fn.getbufinfo (nvim.fn.bufname)) 1 :linecount)))
+                            :filetype]
                 :lualine_z [:location]}
      :inactive_sections {:lualine_a [:mode]
                          :lualine_b []
-                         :lualine_c [:filetype]
+                         :lualine_c [:filename :filetype]
                          :lualine_x [:location]
                          :lualine_y []
                          :lualine_z []}}))

@@ -4,6 +4,9 @@
 
 (rust-tools.setup
   {:tools
-   {:hover_with_actions true
+   {:autoSetHints true
+    :hover_with_actions true
     :hover_actions
-    {:auto_focus true}}})
+    {:auto_focus true}
+    :inlay_hints
+    {:only_current_line false}}})

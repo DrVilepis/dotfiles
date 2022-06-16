@@ -9,6 +9,8 @@
              {:name :nvim_lsp}
              {:name :crates}]
    :mapping {:<C-Space> (cmp.mapping.complete)
-             :<CR>      (cmp.mapping.confirm {:select true})}})
+             :<CR>      (cmp.mapping.confirm {:select true})
+             :<S-Tab>     (fn [] (cmp.select_next_item))
+             :<C-Tab>   (fn [] (cmp.select_prev_item))}})
 
 (cmp.setup.cmdline "/" {:sources [{:name :buffer}]})

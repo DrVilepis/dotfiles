@@ -1,9 +1,9 @@
 (module dots.keybinds
   {autoload {a aniseed.core
-             nvim aniseed.nvim}})
+             gs gitsigns}})
 
 (defn map [mode lhs rhs ?opts]
-  (nvim.set_keymap mode lhs rhs (or ?opts {:noremap true})))
+  (vim.keymap.set mode lhs rhs (or ?opts {:noremap true})))
 
 (map :n "<leader>ff" "<cmd>Telescope find_files<CR>")
 (map :n "<leader>fg" "<cmd>Telescope live_grep<CR>")
@@ -35,19 +35,17 @@
 (map :n "<leader>rp" "<cmd>RustParentModule<CR>")
 
 ;; Gitsigns
-(map :n "<leader>hs" ":Gitsigns stage_hunk<CR>")
-(map :v "<leader>hs" ":Gitsigns stage_hunk<CR>")
-(map :n "<leader>hr" ":Gitsigns reset_hunk<CR>")
-(map :v "<leader>hr" ":Gitsigns reset_hunk<CR>")
-(map :n "<leader>hS" "<cmd>Gitsigns stage_buffer<CR>")
-(map :n "<leader>hu" "<cmd>Gitsigns undo_stage_hunk<CR>")
-(map :n "<leader>hR" "<cmd>Gitsigns reset_buffer<CR>")
-(map :n "<leader>hp" "<cmd>Gitsigns preview_hunk<CR>")
-(map :n "<leader>hb" "<cmd>lua require'gitsigns'.blame_line{full=true}<CR>")
-(map :n "<leader>tb" "<cmd>Gitsigns toggle_current_line_blame<CR>")
-(map :n "<leader>hd" "<cmd>Gitsigns diffthis<CR>")
-(map :n "<leader>hD" "<cmd>lua require'gitsigns'.diffthis('~')<CR>")
-(map :n "<leader>td" "<cmd>Gitsigns toggle_deleted<CR>")
+(map [:n :v] "<leader>hs" gs.stage_hunk)
+(map [:n :v] "<leader>hr" gs.reset_hunk)
+(map :n "<leader>hS" gs.stage_buffer)
+(map :n "<leader>hu" gs.undo_stage_hunk)
+(map :n "<leader>hR" gs.reset_buffer)
+(map :n "<leader>hp" gs.preview_hunk)
+(map :n "<leader>hb" (lambda [] (gs.blame_line {:full true})))
+(map :n "<leader>tb" gs.toggle_current_line_blame)
+(map :n "<leader>hd" gs.diffthis)
+(map :n "<leader>hD" (lambda [] (gs.diffthis "~")))
+(map :n "<leader>td" gs.toggle_deleted)
 
 (map :n "<leader>n" ":Neogit<CR>")
 
@@ -63,6 +61,8 @@
 
 (vim.cmd "highlight indent1 guifg=#E06C75 gui=nocombine")
 (vim.cmd "highlight indent2 guifg=#ffffff gui=nocombine")
+
+(map [:n :v] :h "/")
 
 (map :n :j :h)
 (map :n :k :j)

@@ -124,6 +124,11 @@ globalkeys = gears.table.join(
     function(c)
         awful.util.spawn([[/bin/sh -c 'qalc -t "$(xclip -sel c -o)" | tr -d "\n" | xclip -sel c']], false)
     end,
+    {description = "Fortti", group = "utils"}),
+    awful.key({ modkey, "Shift" }, "f",
+    function(c)
+        awful.util.spawn([[/bin/sh -c 'mpv --image-display-duration=inf "https://media.discordapp.net/stickers/935497018346975302.png"']], false)
+    end,
     {description = "move cursor to top-left corner", group = "utils"}),
     awful.key({ modkey,"Shift"}, "r",
         function(s) awful.spawn('/bin/sh -c "$HOME/scripts/termless_scriptrunner"') end,

@@ -19,6 +19,7 @@ alias dots="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 alias nvimdiff="nvim -d"
 alias tempdir='cd $(mktemp -d)'
 alias clip="xclip -sel clip"
+alias oclip="xclip -sel clip -o"
 alias brute="s6-softlimit -m 10737418240"
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 eval "$(zoxide init zsh --cmd cd)"
