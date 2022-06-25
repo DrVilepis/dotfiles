@@ -1,7 +1,8 @@
 (module vile-nvim
   {autoload {a aniseed.core
              nvim aniseed.nvim
-             plugins dots.plugins}})
+             plugins dots.plugins
+             utils dots.utils}})
 
 (set nvim.o.termguicolors true)
 (set nvim.o.tabstop 4)
@@ -25,6 +26,12 @@
 (set nvim.g.testaustime_ignore "netrw TelescopePrompt help NeogitStatus NeogitCommitMessage NeogitPopup gitcommit packer")
 
 (require "dots.keybinds")
+
+(local ftcmds {"nroff" (fn [] (set nvim.o.expandtab false))})
+
+(vim.api.nvim_create_autocmd ["BufWritePre"] {:callback utils.trim_trailing_whitespaces})
+(vim.api.nvim_create_autocmd ["BufEnter"] {:callback (fn [] (let [callback (?. ftcmds nvim.bo.filetype)] (when callback (callback))))})
+
 
 (plugins.use
   ;; Starting speed
@@ -91,9 +98,9 @@
   :jghauser/mkdir.nvim {}
   :nkakouros-original/numbers.nvim {:mod :numbers}
 
-
   ;; Testaustime
-  :lajp/testaustime-nvim {:run "cabal install --overwrite-policy=always"}
+  :testaustime/testaustime.nvim {:requires [[:nvim-lua/plenary.nvim]]
+                                 :config (fn [] (require :testaustime))}
 
   ;; nvim-cmp for completion
   :hrsh7th/cmp-nvim-lsp {}
@@ -103,5 +110,4 @@
                                 :hrsh7th/cmp-path]
                      :mod :cmp}
 
-  :wbthomason/packer.nvim {}
-  )
+  :wbthomason/packer.nvim {})
