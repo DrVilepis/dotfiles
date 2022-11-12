@@ -18,20 +18,15 @@
 (set nvim.o.cmdheight 1)
 (set nvim.o.scrolloff 3)
 
-;; Testaustime options
-(set nvim.g.testaustime_url "https://api.testaustime.fi")
-(set nvim.g.testaustime_token (let [f (assert (io.input "/home/drvilepis/.config/nvim/testaustime_token"))]
-                                (let [content (f:read :a)]
-                                  (content:gsub "%s+" ""))))
-(set nvim.g.testaustime_ignore "netrw TelescopePrompt help NeogitStatus NeogitCommitMessage NeogitPopup gitcommit packer")
-
 (require "dots.keybinds")
 
 (local ftcmds {"nroff" (fn [] (set nvim.o.expandtab false))})
 
+;; Testaustime options
 (vim.api.nvim_create_autocmd ["BufWritePre"] {:callback utils.trim_trailing_whitespaces})
 (vim.api.nvim_create_autocmd ["BufEnter"] {:callback (fn [] (let [callback (?. ftcmds nvim.bo.filetype)] (when callback (callback))))})
-
+(vim.api.nvim_create_autocmd ["BufRead" "BufNewFile"] {:pattern ["*.vert" "*.frag"]
+                                                       :callback (fn [] (set vim.o.filetype :glsl))})
 
 (plugins.use
   ;; Starting speed
@@ -42,6 +37,9 @@
 
   ;; Lsp
   :neovim/nvim-lspconfig {:mod :lsp}
+
+  ;; Important
+  :rcarriga/nvim-notify {:mod :notify}
 
   ;; Snippets
   :L3MON4D3/LuaSnip {:mod :luasnip}
@@ -86,6 +84,11 @@
   ;; Buffer tabs
   :akinsho/bufferline.nvim {:mod :bufferline :requires [[:kyazdani42/nvim-web-devicons]]}
 
+  ;; File tree
+  :kyazdani42/nvim-tree.lua {:requires [:kyazdani42/nvim-web-devicons]
+                             :tag :nightly
+                             :mod :nvim-tree}
+
   ;; Icons
   :kyazdani42/nvim-web-devicons {:mod :devicons}
 
@@ -93,14 +96,17 @@
   :folke/trouble.nvim {:mod :trouble}
   :ggandor/lightspeed.nvim {}
   :windwp/nvim-autopairs {}
-  :tpope/vim-surround {}
+  :kylechui/nvim-surround {:mod :surround}
   :wellle/targets.vim {}
   :jghauser/mkdir.nvim {}
   :nkakouros-original/numbers.nvim {:mod :numbers}
 
+  ;; Marks
+  :chentoast/marks.nvim {:mod marks}
+
   ;; Testaustime
   :testaustime/testaustime.nvim {:requires [[:nvim-lua/plenary.nvim]]
-                                 :config (fn [] (require :testaustime))}
+                                 :mod :testaustime}
 
   ;; nvim-cmp for completion
   :hrsh7th/cmp-nvim-lsp {}

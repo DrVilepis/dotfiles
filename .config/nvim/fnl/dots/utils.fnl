@@ -8,3 +8,8 @@
     (let [current_view (nvim.fn.winsaveview)]
         (vim.cmd "keeppatterns %s/\\s\\+$//e")
         (nvim.fn.winrestview current_view))))
+
+(defn get_testaustime_token []
+  (let [f (assert (io.input (.. (os.getenv "HOME") "/.config/nvim/testaustime_token")))]
+    (let [content (f:read :a)]
+      (content:gsub "%s+" ""))))

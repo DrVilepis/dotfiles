@@ -4,7 +4,7 @@
              lualine lualine}
    require {colors dots.colors}})
 
-(let [colors (collect [k v (pairs (. colors :colors))] k (do (.. "#" v)))]
+(let [colors (collect [k v (pairs (. colors :colors))] k (.. "#" v))]
   (lualine.setup
     {:options
      {:icons_enabled true
@@ -36,17 +36,22 @@
                :c {:bg colors.dark1 :fg colors.light3}}}}
      :sections {:lualine_a [:mode]
                 :lualine_b [:hostname
-                            (fn [] (let [lsp (vim.lsp.get_active_clients)] 
-                                     (.. " lsp: " 
-                                         (if (next lsp) 
-                                           (table.concat 
-                                             (icollect [_ val (pairs lsp)] (. val :name)) " & ")
+                            (fn [] (let [lsp (vim.lsp.get_active_clients)]
+                                     (.. " lsp: "
+                                         (if (next lsp)
+                                           (table.concat (icollect [_ val (pairs lsp)] (. val :name)) " & ")
                                            "None"))))]
                 :lualine_c [:filename :branch :diff]
                 :lualine_x [:encoding :fileformat]
-                :lualine_y [(fn [] (.. "Line count: " (. (nvim.fn.getbufinfo (nvim.fn.bufname)) 1 :linecount)))
-                            :filetype]
-                :lualine_z [:location]}
+                :lualine_y [:filetype]
+                :lualine_z [(fn [] (let [[cur_line cur_char] (vim.api.nvim_win_get_cursor 0)]
+                                     (.. cur_line
+                                         ":"
+                                         (+ cur_char 1)
+                                         "/"
+                                         (. (vim.api.nvim_buf_line_count 0))
+                                         ":"
+                                         (string.len (. (vim.api.nvim_buf_get_lines 0 (- cur_line 1) cur_line false) 1)))))]}
      :inactive_sections {:lualine_a [:mode]
                          :lualine_b []
                          :lualine_c [:filename :filetype]

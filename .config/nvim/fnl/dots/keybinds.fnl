@@ -1,6 +1,8 @@
 (module dots.keybinds
   {autoload {a aniseed.core
-             gs gitsigns}})
+             gs gitsigns
+             plenary plenary
+             ntapi nvim-tree.api}})
 
 (defn map [mode lhs rhs ?opts]
   (vim.keymap.set mode lhs rhs (or ?opts {:noremap true})))
@@ -26,6 +28,8 @@
 ;; Lsp keybinds
 (map :n "<leader><space>" "<cmd>lua vim.lsp.buf.hover()<CR>")
 (map :n "<leader>rn" "<cmd>lua vim.lsp.buf.rename()<CR>")
+(map :n "<leader>ls" (fn [] (vim.lsp.stop_client (vim.lsp.get_active_clients))
+                       (vim.notify "Lsp stopped" vim.log.levels.WARN)))
 
 ;; Rust related keybinds
 (map :n "<leader>rs" "<cmd>RustStartStandaloneServerForBuffer<CR>")
@@ -34,7 +38,7 @@
 (map :n "<leader>ru" "<cmd>RustMoveItemUp<CR>")
 (map :n "<leader>rd" "<cmd>RustMoveItemDown<CR>")
 (map :n "<leader>re" "<cmd>RustExpandMacro<CR>")
-(map :n "<leader>rr" "<cmd>RustRunnables<CR>")
+;; (map :n "<leader>rr" "<cmd>RustRunnables<CR>")
 (map :n "<leader>rp" "<cmd>RustParentModule<CR>")
 
 ;; Gitsigns
@@ -45,10 +49,13 @@
 (map :n "<leader>hR" gs.reset_buffer)
 (map :n "<leader>hp" gs.preview_hunk)
 (map :n "<leader>hb" (fn [] (gs.blame_line {:full true})))
-(map :n "<leader>tb" gs.toggle_current_line_blame)
+;; (map :n "<leader>tb" gs.toggle_current_line_blame)
 (map :n "<leader>hd" gs.diffthis)
 (map :n "<leader>hD" (fn [] (gs.diffthis "~")))
-(map :n "<leader>td" gs.toggle_deleted)
+;; (map :n "<leader>hd" gs.toggle_deleted)
+
+(map :n "<leader>tt" (fn [] (ntapi.tree.focus)))
+(map :n "<leader>tq" (fn [] (ntapi.tree.close)))
 
 (map :n "<leader>n" ":Neogit<CR>")
 

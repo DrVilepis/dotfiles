@@ -4,27 +4,26 @@
 
 (let [t luasnip.text_node
       s luasnip.snippet]
-  (luasnip.add_snippets 
+  (luasnip.add_snippets
     :rust
     [(luasnip.snippet "readints"
-                      [(luasnip.text_node 
+                      [(luasnip.text_node
                          ["#[macro_export]"
                           "macro_rules! readints {"
-                          "    ($x:ident,$y:ident) => {{"
+                          "    ($x:ident) => {{"
+                          "        let mut input = String::new();"
                           "        $x.read_line(&mut $y).unwrap();"
-                          "        let nums = $y"
+                          "        let nums = input"
                           "            .trim()"
                           "            .split_whitespace()"
-                          "            .map(|s| s.parse::<i32>().unwrap())"
+                          "            .map(|s| s.parse().unwrap())"
                           "            .collect::<Vec<_>>();"
-                          "        $y.clear();"
                           "        nums"
                           "    }};"
                           "}"])])
      (luasnip.snippet "is_prime"
-                      [(luasnip.text_node 
-                         ["fn is_prime<T: Into<i64>>(n: T) -> bool {"
-                          "    let n: i64 = n.into();"
+                      [(luasnip.text_node
+                         ["fn is_prime(n: usize) -> bool {"
                           "    match n {"
                           "        1 => false,"
                           "        2 | 3 => true,"
@@ -36,21 +35,17 @@
                           "    }"
                           "}"])])
      (luasnip.snippet "generate_primes"
-                      [(luasnip.text_node 
+                      [(luasnip.text_node
                          [
-                          "fn generate_primes(n: usize) -> Vec<usize> {"
-                          "    let mut nums = vec![true; n];"
-                          "    (2..n).step_by(2).for_each(|n| nums[n] = false);"
-                          "    let mut primes = vec![2];"
-                          "    (3..nums.len()).fold(2, |mut p, i| {"
+                          "fn generate_primes(n: usize) -> impl Iterator<Item = usize> {"
+                          "    let mut nums = vec![true; n+1];"
+                          "    (3..n).step_by(2).filter_map(move |i| {"
                           "        if nums[i] {"
-                          "            primes.push(i);"
-                          "            p = i * i;"
-                          "            (p..n).step_by(p).for_each(|n| nums[n] = false);"
+                          "            ((i+i)..=n).step_by(i).for_each(|n| nums[n] = false);"
+                          "            return Some(i)"
                           "        }"
-                          "        p"
-                          "    });"
-                          "    primes"
+                          "        None"
+                          "    })"
                           "}" ])])
      (luasnip.snippet "mainstdin"
                       [(luasnip.text_node
