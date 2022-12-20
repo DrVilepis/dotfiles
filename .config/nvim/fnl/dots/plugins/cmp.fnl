@@ -1,7 +1,8 @@
 (module dots.plugins.cmp
   {autoload {a aniseed.core
              cmp cmp
-             luasnip luasnip}})
+             luasnip luasnip
+             compare cmp.config.compare}})
 (cmp.setup
   {:snippet {:expand (fn [args] (luasnip.lsp_expand args.body))}
    :sources [{:name :luasnip}

@@ -1,4 +1,4 @@
-(module vile-nvim
+(module vi
   {autoload {a aniseed.core
              nvim aniseed.nvim
              plugins dots.plugins
@@ -28,6 +28,9 @@
 (vim.api.nvim_create_autocmd ["BufRead" "BufNewFile"] {:pattern ["*.vert" "*.frag"]
                                                        :callback (fn [] (set vim.o.filetype :glsl))})
 
+(vim.api.nvim_create_autocmd ["BufRead" "BufNewFile"] {:pattern ["*.susmog"]
+                                                       :callback (fn [] (set vim.o.filetype :sexyamoguslang))})
+
 (plugins.use
   ;; Starting speed
   :lewis6991/impatient.nvim {}
@@ -48,14 +51,12 @@
 
   ;; Debugger
   :mfussenegger/nvim-dap {:opt false}
-  :nvim-telescope/telescope-dap.nvim {:requires [:mfussenegger/nvim-dap
-                                                 :nvim-telescope/telescope.nvim]
-                                      :mod :telescope}
 
   ;; Vanity
   :lukas-reineke/indent-blankline.nvim {:mod :indent}
   :nvim-treesitter/nvim-treesitter {:mod :treesitter}
   :petertriho/nvim-scrollbar {:mod :scrollbar}
+  :kevinhwang91/nvim-hlslens {:mod :hlslens}
 
   ;; Rust
   :rust-lang/rust.vim {:ft ["rust"]}
@@ -70,19 +71,20 @@
 
   ;; Git
   :lewis6991/gitsigns.nvim {:mod :gitsigns :requires [[:nvim-lua/plenary.nvim]]}
-  :TimUntersberger/neogit {:requires [[:nvim-lua/plenary.nvim]]}
 
   ;; Statusbar
   :nvim-lualine/lualine.nvim {:mod :lualine}
   :nvim-lua/lsp-status.nvim {}
 
   ;; Telescope
-  :nvim-telescope/telescope.nvim {:requires [[:nvim-lua/popup.nvim] [:nvim-lua/plenary.nvim]]}
+  :nvim-telescope/telescope-fzf-native.nvim {:run "make"}
   :LinArcX/telescope-env.nvim {}
   :luc-tielen/telescope_hoogle {}
+  :nvim-telescope/telescope.nvim {:requires [[:nvim-lua/popup.nvim] [:nvim-lua/plenary.nvim]]}
 
-  ;; Buffer tabs
+  ;; Buffers
   :akinsho/bufferline.nvim {:mod :bufferline :requires [[:kyazdani42/nvim-web-devicons]]}
+  :famiu/bufdelete.nvim {}
 
   ;; File tree
   :kyazdani42/nvim-tree.lua {:requires [:kyazdani42/nvim-web-devicons]
@@ -102,7 +104,7 @@
   :nkakouros-original/numbers.nvim {:mod :numbers}
 
   ;; Marks
-  :chentoast/marks.nvim {:mod marks}
+  :chentoast/marks.nvim {:mod :marks}
 
   ;; Testaustime
   :testaustime/testaustime.nvim {:requires [[:nvim-lua/plenary.nvim]]
@@ -111,6 +113,7 @@
   ;; nvim-cmp for completion
   :hrsh7th/cmp-nvim-lsp {}
   :hrsh7th/cmp-path {}
+  :tzachar/cmp-fuzzy-buffer {:requires [[:hrsh7th/nvim-cmp] [:tzachar/fuzzy.nvim]]}
   :hrsh7th/nvim-cmp {:opt false
                      :requires [:hrsh7th/cmp-nvim-lsp
                                 :hrsh7th/cmp-path]

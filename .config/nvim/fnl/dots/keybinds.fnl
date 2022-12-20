@@ -2,7 +2,9 @@
   {autoload {a aniseed.core
              gs gitsigns
              plenary plenary
-             ntapi nvim-tree.api}})
+             ntapi nvim-tree.api
+             : bufferline
+             : bufdelete}})
 
 (defn map [mode lhs rhs ?opts]
   (vim.keymap.set mode lhs rhs (or ?opts {:noremap true})))
@@ -17,17 +19,22 @@
 (map :t "<Esc>" "<C-\\><C-n>")
 
 ;; Bufferline keybinds
-(map :n "bl" "<cmd>BufferLineCycleNext<CR>")
-(map :n "bk" "<cmd>BufferLineCyclePrev<CR>")
+(map :n "bö" "<cmd>BufferLineCycleNext<CR>")
+(map :n "bj" "<cmd>BufferLineCyclePrev<CR>")
+(map :n "bl" "<cmd>BufferLineMoveNext<CR>")
+(map :n "bk" "<cmd>BufferLineMovePrev<CR>")
 (map :n "bf" "<cmd>BufferLinePick<CR>")
-(map :n "bö" "<cmd>BufferLineMoveNext<CR>")
-(map :n "bj" "<cmd>BufferLineMovePrev<CR>")
-(map :n "be" "<cmd>BufferLineSortByExtension<CR>" {:noremap true :silent true})
-(map :n "bd" "<cmd>BufferLineSortByDirectory<CR>" {:noremap true :silent true})
+(map :n "bd" (fn [] (bufdelete.bufdelete 0 true)) {:noremap true :silent true})
+
+(map :n "<leader>sh" "<cmd>split<CR>")
+(map :n "<leader>sv" "<cmd>vsplit<CR>")
+
+(for [i 1 9]
+  (map :n (.. "<leader>" i) (fn [] (bufferline.go_to_buffer i true))))
 
 ;; Lsp keybinds
-(map :n "<leader><space>" "<cmd>lua vim.lsp.buf.hover()<CR>")
-(map :n "<leader>rn" "<cmd>lua vim.lsp.buf.rename()<CR>")
+(map :n "<leader><space>" vim.lsp.buf.hover)
+(map :n "<leader>ln" vim.lsp.buf.rename)
 (map :n "<leader>ls" (fn [] (vim.lsp.stop_client (vim.lsp.get_active_clients))
                        (vim.notify "Lsp stopped" vim.log.levels.WARN)))
 
@@ -38,7 +45,6 @@
 (map :n "<leader>ru" "<cmd>RustMoveItemUp<CR>")
 (map :n "<leader>rd" "<cmd>RustMoveItemDown<CR>")
 (map :n "<leader>re" "<cmd>RustExpandMacro<CR>")
-;; (map :n "<leader>rr" "<cmd>RustRunnables<CR>")
 (map :n "<leader>rp" "<cmd>RustParentModule<CR>")
 
 ;; Gitsigns
@@ -57,8 +63,6 @@
 (map :n "<leader>tt" (fn [] (ntapi.tree.focus)))
 (map :n "<leader>tq" (fn [] (ntapi.tree.close)))
 
-(map :n "<leader>n" ":Neogit<CR>")
-
 (map :n "<leader>rf" ":RustFmt<CR>")
 
 ;; Trouble.nvim keybinds
@@ -72,11 +76,17 @@
 (map [:n :v] :h "/")
 (map [:n :v] :H (fn [] (vim.cmd "nohlsearch")))
 
+;; Nordic remaps
 (map [:n :v] :j :h)
 (map [:n :v] :k :j)
-(map [:n :v] :ö :l)
 (map [:n :v] :l :k)
+(map [:n :v] :ö :l)
 (map [:n :v] :J :H)
 (map [:n :v] :K :J)
-(map [:n :v] :Ö :L)
 (map [:n :v] :L :K)
+(map [:n :v] :Ö :L)
+
+(map [:n :v] :<C-W>j :<C-W>h)
+(map [:n :v] :<C-W>k :<C-W>j)
+(map [:n :v] :<C-W>l :<C-W>k)
+(map [:n :v] :<C-W>ö :<C-W>l)

@@ -52,9 +52,9 @@
                                          (. (vim.api.nvim_buf_line_count 0))
                                          ":"
                                          (string.len (. (vim.api.nvim_buf_get_lines 0 (- cur_line 1) cur_line false) 1)))))]}
-     :inactive_sections {:lualine_a [:mode]
+     :inactive_sections {:lualine_a [:filename :filetype]
                          :lualine_b []
-                         :lualine_c [:filename :filetype]
-                         :lualine_x [:location]
+                         :lualine_c []
+                         :lualine_x []
                          :lualine_y []
                          :lualine_z []}}))
