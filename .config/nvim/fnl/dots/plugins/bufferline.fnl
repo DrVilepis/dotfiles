@@ -3,9 +3,12 @@
              nvim aniseed.nvim
              bufferline bufferline}})
 
-(bufferline.setup 
+(bufferline.setup
   {:options
    {:diagnostics :nvim_lsp
     :show_close_icon false
     :show_buffer_clone_icons false
-    :separator_style :thick}})
+    :separator_style :thick
+    :buffer_close_icon ""
+    :modified_icon "●"
+    :close_icon ""}})

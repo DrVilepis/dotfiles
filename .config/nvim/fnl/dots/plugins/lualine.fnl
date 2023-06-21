@@ -1,6 +1,7 @@
 (module dots.plugins.lualine
   {autoload {a aniseed.core
              nvim aniseed.nvim
+             utils dots.utils
              lualine lualine}
    require {colors dots.colors}})
 
@@ -43,7 +44,9 @@
                                            "None"))))]
                 :lualine_c [:filename :branch :diff]
                 :lualine_x [:encoding :fileformat]
-                :lualine_y [:filetype]
+                :lualine_y [#(if (= vim.bo.filetype "text") (.. "Chars: " (. (vim.fn.wordcount) :bytes)) "")
+                            {0         :filetype
+                             :on_click utils.select_filetype}]
                 :lualine_z [(fn [] (let [[cur_line cur_char] (vim.api.nvim_win_get_cursor 0)]
                                      (.. cur_line
                                          ":"

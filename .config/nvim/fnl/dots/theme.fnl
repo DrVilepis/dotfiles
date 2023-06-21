@@ -1,0 +1,87 @@
+(module dots.theme
+  {autoload {{: colors} dots.colors}})
+
+(defn- highlight [group value] (vim.api.nvim_set_hl 0 group value))
+
+(local colors (collect [k v (pairs colors)] k (.. "#" v)))
+
+;; Vim colors
+(highlight "Normal" {:fg colors.light1 :bg colors.dark0})
+(highlight "Bold" {:bold true})
+(highlight "Directory" {:fg colors.blue})
+(highlight "Error" {:fg colors.dark0 :bg colors.red})
+(highlight "ErrorMsg" {:fg colors.red :bg colors.dark0})
+(highlight "Exception" {:fg colors.red})
+(highlight "FoldColumn" {:fg colors.cyan :bg colors.dark1})
+(highlight "Folded" {:fg colors.dark2})
+(highlight "Visual" {:bg colors.dark2})
+(highlight "Title" {:fg colors.blue})
+(highlight "Cursor" {:fg colors.dark0 :bg colors.light0})
+(highlight "CursorLine" {:bg colors.dark1})
+(highlight "CursorLineNr" {:fg colors.green :bg colors.dark1})
+(highlight "CursorLineSign" {:fg colors.green :bg colors.dark1})
+(highlight "CursorLineFold" {:fg colors.green :bg colors.dark1})
+(highlight "SignColumn" {:fg colors.dark3})
+(highlight "LineNr" {:fg colors.dark3 :bg colors.dark1})
+(highlight "MatchParen" {:bg colors.dark3})
+(highlight "SignColumn" {:fg colors.dark3 :bg colors.dark1})
+(highlight "Pmenu" {:fg colors.light0 :bg colors.dark1})color
+(highlight "PmenuSel" {:fg colors.dark0 :bg colors.light0})
+(highlight "IncSearch" {:fg colors.dark1 :bg colors.yellow})
+(highlight "Search" {:fg colors.dark1 :bg colors.yellow})
+(highlight "NonText" {:fg colors.dark3})
+(highlight "ColorColumn" {:bg colors.dark1})
+(highlight "Conceal" {:fg colors.blue :bg colors.dark0})
+(highlight "ModeMsg" {:fg colors.green})
+(highlight "MoreMsg" {:fg colors.orange})
+(highlight "Wildmenu" {:fg colors.yellow})
+(highlight "Todo" {:fg colors.dark1 :bg colors.yellow})
+
+(highlight "TabLine" {:fg colors.dark3 :bg colors.dark1})
+(highlight "TabLineFill" {:fg colors.dark3 :bg colors.dark1})
+(highlight "TabLineSel" {:fg colors.orange :bg colors.dark1})
+
+;; Syntax
+(highlight "Constant" {:fg colors.orange})
+(highlight "String" {:fg colors.green})
+(highlight "Character" {:fg colors.red})
+(highlight "Number" {:fg colors.orange})
+(highlight "Boolean" {:fg colors.orange})
+(highlight "Float" {:fg colors.orange})
+
+(highlight "Identifier" {:fg colors.red})
+(highlight "Function" {:fg colors.blue})
+
+(highlight "Conditional" {:fg colors.purple})
+(highlight "Repeat" {:fg colors.yellow})
+(highlight "Label" {:fg colors.yellow})
+(highlight "Operator" {:fg colors.light1})
+(highlight "Keyword" {:fg colors.purple})
+(highlight "Exception" {:fg colors.red})
+(highlight "Statement" {:fg colors.red})
+(highlight "Macro" {:fg colors.red})
+(highlight "Special" {:fg colors.cyan})
+(highlight "SpecialChar" {:fg colors.brown})
+(highlight "Delimiter" {:fg colors.brown})
+(highlight "Include" {:fg colors.blue})
+(highlight "Define" {:fg colors.purple})
+(highlight "PreProc" {:fg colors.blue})
+
+(highlight "Structure" {:fg colors.yellow})
+(highlight "Type" {:fg colors.yellow})
+(highlight "Comment" {:fg colors.dark4})
+
+;; Rust
+(highlight "@lsp.type.namespace.rust" {:link "Identifier"})
+(highlight "@lsp.typemod.enumMember.defaultLibrary.rust" {:link "Special"})
+
+;; Diffs
+(highlight "DiffAdd" {:fg colors.green :bg colors.dark1})
+(highlight "DiffAdded" {:fg colors.green :bg colors.dark1})
+(highlight "DiffDelete" {:fg colors.red :bg colors.dark1})
+(highlight "DiffRemoved" {:fg colors.red :bg colors.dark1})
+(highlight "DiffFile" {:fg colors.red :bg colors.dark1})
+(highlight "DiffNewFile" {:fg colors.red :bg colors.dark1})
+(highlight "DiffLine" {:fg colors.green :bg colors.dark1})
+(highlight "DiffText" {:fg colors.green :bg colors.dark1})
+(highlight "DiffChange" {:fg colors.blue :bg colors.dark1})

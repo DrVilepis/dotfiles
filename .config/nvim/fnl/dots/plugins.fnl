@@ -7,9 +7,6 @@
     (when (not ok?)
       (print (.. "Plugin config error: " val-or-err)))))
 
-(defn req [name]
-  (.. "require('dots.plugins." name "')"))
-
 (defn use [...]
   (let [pkgs [...]]
     (packer.startup

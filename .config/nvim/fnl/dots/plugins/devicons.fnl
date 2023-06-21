@@ -2,10 +2,10 @@
   {autoload {a aniseed.core
              devicons nvim-web-devicons}})
 
-(devicons.setup 
+(devicons.setup
   {:override
    {:zsh
     {:icon :
-     :color :#4288502
+     :color :#428850
      :name :Zsh}}
    :default true})

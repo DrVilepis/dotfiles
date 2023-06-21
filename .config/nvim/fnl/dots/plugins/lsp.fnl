@@ -17,10 +17,12 @@
 ;; (init-lsp :hls {:single_file_support true})
 (init-lsp :asm_lsp)
 (init-lsp :tsserver)
+(init-lsp :elmls)
 (init-lsp :clojure_lsp)
+(init-lsp :lua_ls)
+;;(init-lsp :rust_analyzer)
 ;; (init-lsp :pyright)
-
-(let [rust-tools (require "rust-tools")]
+ (let [rust-tools (require "rust-tools")]
   (rust-tools.setup {:tools {:inlay_hints {:show_parameter_hints false}
                              :on_initialized (fn [] (vim.notify "rust_analyzer initialized"))
                              :autoSetHints false}

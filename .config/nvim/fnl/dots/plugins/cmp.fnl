@@ -11,8 +11,8 @@
              {:name :path}]
    :mapping {:<C-Space> (cmp.mapping.complete)
              :<Tab>     (cmp.mapping.confirm {:select true})
-             :<S-Tab>   (fn [arg] (if (cmp.visible) (cmp.select_next_item) (arg)))
-             :<C-Tab>   (fn [] (cmp.select_prev_item))}})
+             :<S-Tab>   #(if (cmp.visible) (cmp.select_next_item) ($))
+             :<C-Tab>   #(cmp.select_prev_item)}})
 
 (cmp.setup.cmdline "/" {:sources [{:name :buffer}]})
 

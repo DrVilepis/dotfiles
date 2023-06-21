@@ -1,8 +1,9 @@
-(module vi
+(module vile-nvim
   {autoload {a aniseed.core
              nvim aniseed.nvim
              plugins dots.plugins
-             utils dots.utils}})
+             utils dots.utils
+             {: colors} dots.colors}})
 
 (set nvim.o.termguicolors true)
 (set nvim.o.tabstop 4)
@@ -17,19 +18,15 @@
 (set nvim.g.indent_blankline_use_treesitter true)
 (set nvim.o.cmdheight 1)
 (set nvim.o.scrolloff 3)
+(set vim.o.cursorline true)
+;; (set vim.o.colorcolumn "+1")
 
-(require "dots.keybinds")
+(require :dots.keybinds)
+(require :dots.filetypes)
 
-(local ftcmds {"nroff" (fn [] (set nvim.o.expandtab false))})
-
-;; Testaustime options
 (vim.api.nvim_create_autocmd ["BufWritePre"] {:callback utils.trim_trailing_whitespaces})
-(vim.api.nvim_create_autocmd ["BufEnter"] {:callback (fn [] (let [callback (?. ftcmds nvim.bo.filetype)] (when callback (callback))))})
-(vim.api.nvim_create_autocmd ["BufRead" "BufNewFile"] {:pattern ["*.vert" "*.frag"]
-                                                       :callback (fn [] (set vim.o.filetype :glsl))})
 
-(vim.api.nvim_create_autocmd ["BufRead" "BufNewFile"] {:pattern ["*.susmog"]
-                                                       :callback (fn [] (set vim.o.filetype :sexyamoguslang))})
+(require :dots.theme)
 
 (plugins.use
   ;; Starting speed
@@ -55,7 +52,6 @@
   ;; Vanity
   :lukas-reineke/indent-blankline.nvim {:mod :indent}
   :nvim-treesitter/nvim-treesitter {:mod :treesitter}
-  :petertriho/nvim-scrollbar {:mod :scrollbar}
   :kevinhwang91/nvim-hlslens {:mod :hlslens}
 
   ;; Rust
@@ -67,7 +63,6 @@
 
   ;; Fennel
   :bakpakin/fennel.vim {:ft ["fennel"]}
-  :norcalli/nvim-base16.lua {:mod :gruvbox}
 
   ;; Git
   :lewis6991/gitsigns.nvim {:mod :gitsigns :requires [[:nvim-lua/plenary.nvim]]}
@@ -78,18 +73,11 @@
 
   ;; Telescope
   :nvim-telescope/telescope-fzf-native.nvim {:run "make"}
-  :LinArcX/telescope-env.nvim {}
-  :luc-tielen/telescope_hoogle {}
   :nvim-telescope/telescope.nvim {:requires [[:nvim-lua/popup.nvim] [:nvim-lua/plenary.nvim]]}
 
   ;; Buffers
   :akinsho/bufferline.nvim {:mod :bufferline :requires [[:kyazdani42/nvim-web-devicons]]}
   :famiu/bufdelete.nvim {}
-
-  ;; File tree
-  :kyazdani42/nvim-tree.lua {:requires [:kyazdani42/nvim-web-devicons]
-                             :tag :nightly
-                             :mod :nvim-tree}
 
   ;; Icons
   :kyazdani42/nvim-web-devicons {:mod :devicons}
@@ -97,14 +85,11 @@
   ;; General editing
   :folke/trouble.nvim {:mod :trouble}
   :ggandor/lightspeed.nvim {}
-  :windwp/nvim-autopairs {}
+  :windwp/nvim-autopairs {:mod :autopairs}
   :kylechui/nvim-surround {:mod :surround}
   :wellle/targets.vim {}
   :jghauser/mkdir.nvim {}
   :nkakouros-original/numbers.nvim {:mod :numbers}
-
-  ;; Marks
-  :chentoast/marks.nvim {:mod :marks}
 
   ;; Testaustime
   :testaustime/testaustime.nvim {:requires [[:nvim-lua/plenary.nvim]]

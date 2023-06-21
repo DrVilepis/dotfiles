@@ -1,22 +1,32 @@
 (module dots.keybinds
   {autoload {a aniseed.core
              gs gitsigns
-             plenary plenary
-             ntapi nvim-tree.api
+             : plenary
              : bufferline
-             : bufdelete}})
+             : bufdelete
+             ts_utils nvim-treesitter.ts_utils
+             utils dots.utils
+             telescope_builtin telescope.builtin
+             telescope_themes telescope.themes}})
 
 (defn map [mode lhs rhs ?opts]
   (vim.keymap.set mode lhs rhs (or ?opts {:noremap true})))
 
-(map :n "<leader>ff" "<cmd>Telescope find_files<CR>")
-(map :n "<leader>fg" "<cmd>Telescope live_grep<CR>")
-(map :n "<leader>fb" "<cmd>Telescope buffers<CR>")
-(map :n "<leader>fh" "<cmd>Telescope help_tags<CR>")
-(map :n "<leader>fe" "<cmd>Telescope env<CR>")
-(map :n "<leader>fd" "<cmd>Telescope diagnostics<CR>")
-(map :n "<leader>fo" "<cmd>Telescope oldfiles<CR>")
 (map :t "<Esc>" "<C-\\><C-n>")
+(map :n "<leader>dd" "\"_dd")
+
+(for [i 1 9]
+  (map :n (.. "<leader>" i) #(bufferline.go_to_buffer i true)))
+
+;; Telescope
+(map :n "<leader>ff" telescope_builtin.find_files)
+(map :n "<leader>fg" telescope_builtin.live_grep)
+(map :n "<leader>fb" telescope_builtin.buffers)
+(map :n "<leader>fh" telescope_builtin.help_tags)
+(map :n "<leader>fd" telescope_builtin.diagnostics)
+(map :n "<leader>fo" telescope_builtin.oldfiles)
+(map :n "<leader>fm" telescope_builtin.marks)
+(map :n "<leader>fl" utils.select_filetype)
 
 ;; Bufferline keybinds
 (map :n "bö" "<cmd>BufferLineCycleNext<CR>")
@@ -24,17 +34,14 @@
 (map :n "bl" "<cmd>BufferLineMoveNext<CR>")
 (map :n "bk" "<cmd>BufferLineMovePrev<CR>")
 (map :n "bf" "<cmd>BufferLinePick<CR>")
-(map :n "bd" (fn [] (bufdelete.bufdelete 0 true)) {:noremap true :silent true})
+(map :n "bd" #(bufdelete.bufdelete 0 true) {:noremap true :silent true})
 
 (map :n "<leader>sh" "<cmd>split<CR>")
 (map :n "<leader>sv" "<cmd>vsplit<CR>")
 
-(for [i 1 9]
-  (map :n (.. "<leader>" i) (fn [] (bufferline.go_to_buffer i true))))
-
 ;; Lsp keybinds
 (map :n "<leader><space>" vim.lsp.buf.hover)
-(map :n "<leader>ln" vim.lsp.buf.rename)
+(map :n "<leader>lr" vim.lsp.buf.rename)
 (map :n "<leader>ls" (fn [] (vim.lsp.stop_client (vim.lsp.get_active_clients))
                        (vim.notify "Lsp stopped" vim.log.levels.WARN)))
 
@@ -54,14 +61,11 @@
 (map :n "<leader>hu" gs.undo_stage_hunk)
 (map :n "<leader>hR" gs.reset_buffer)
 (map :n "<leader>hp" gs.preview_hunk)
-(map :n "<leader>hb" (fn [] (gs.blame_line {:full true})))
+(map :n "<leader>hb" #(gs.blame_line {:full true}))
 ;; (map :n "<leader>tb" gs.toggle_current_line_blame)
 (map :n "<leader>hd" gs.diffthis)
-(map :n "<leader>hD" (fn [] (gs.diffthis "~")))
+(map :n "<leader>hD" #(gs.diffthis "~"))
 ;; (map :n "<leader>hd" gs.toggle_deleted)
-
-(map :n "<leader>tt" (fn [] (ntapi.tree.focus)))
-(map :n "<leader>tq" (fn [] (ntapi.tree.close)))
 
 (map :n "<leader>rf" ":RustFmt<CR>")
 
@@ -71,10 +75,8 @@
 (map :n "<leader>xd" "<cmd>Trouble lsp_document_diagnostics<cr>" {:noremap true :silent true})
 (map :n "<leader>xl" "<cmd>Trouble loclist<cr>" {:noremap true :silent true})
 (map :n "<leader>xq" "<cmd>Trouble quickfix<cr>" {:noremap true :silent true})
-(map :n "gR" "<cmd>Trouble lsp_references<cr>" {:noremap true :silent true})
 
-(map [:n :v] :h "/")
-(map [:n :v] :H (fn [] (vim.cmd "nohlsearch")))
+(map [:n :v] :h #(vim.cmd "nohlsearch"))
 
 ;; Nordic remaps
 (map [:n :v] :j :h)

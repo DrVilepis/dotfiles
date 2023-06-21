@@ -1,6 +1,7 @@
 (module dots.utils
   {autoload {a aniseed.core
              nvim aniseed.nvim
+             telescope_builtin telescope.builtin
              packer packer}})
 
 (defn trim_trailing_whitespaces []
@@ -13,3 +14,8 @@
   (let [f (assert (io.input (.. (os.getenv "HOME") "/.config/nvim/testaustime_token")))]
     (let [content (f:read :a)]
       (content:gsub "%s+" ""))))
+
+(defn select_filetype []
+  (set vim.bo.filetype (telescope_builtin.filetypes)))
+
+(defn load-fthook [filetype] (pcall require (.. "dots.fthooks." filetype)))
