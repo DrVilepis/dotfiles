@@ -4,6 +4,7 @@
              : plenary
              : bufferline
              : bufdelete
+             : trouble
              ts_utils nvim-treesitter.ts_utils
              utils dots.utils
              telescope_builtin telescope.builtin
@@ -12,7 +13,7 @@
 (defn map [mode lhs rhs ?opts]
   (vim.keymap.set mode lhs rhs (or ?opts {:noremap true})))
 
-(map :t "<Esc>" "<C-\\><C-n>")
+;; (map :t "<Esc>" "<C-\\><C-n>")
 (map :n "<leader>dd" "\"_dd")
 
 (for [i 1 9]
@@ -83,9 +84,8 @@
 (map [:n :v] :k :j)
 (map [:n :v] :l :k)
 (map [:n :v] :ö :l)
-(map [:n :v] :J :H)
-(map [:n :v] :K :J)
-(map [:n :v] :L :K)
+(map [:n :v] :K vim.diagnostic.goto_next)
+(map [:n :v] :L vim.diagnostic.goto_prev)
 (map [:n :v] :Ö :L)
 
 (map [:n :v] :<C-W>j :<C-W>h)

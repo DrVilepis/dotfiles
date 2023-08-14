@@ -3,10 +3,8 @@
 
 (defn- highlight [group value] (vim.api.nvim_set_hl 0 group value))
 
-(local colors (collect [k v (pairs colors)] k (.. "#" v)))
-
 ;; Vim colors
-(highlight "Normal" {:fg colors.light1 :bg colors.dark0})
+(highlight "Normal" {:fg colors.light1})
 (highlight "Bold" {:bold true})
 (highlight "Directory" {:fg colors.blue})
 (highlight "Error" {:fg colors.dark0 :bg colors.red})
@@ -18,16 +16,16 @@
 (highlight "Title" {:fg colors.blue})
 (highlight "Cursor" {:fg colors.dark0 :bg colors.light0})
 (highlight "CursorLine" {:bg colors.dark1})
+(highlight "LineNr" {:fg colors.dark3 :bg colors.dark1})
 (highlight "CursorLineNr" {:fg colors.green :bg colors.dark1})
 (highlight "CursorLineSign" {:fg colors.green :bg colors.dark1})
 (highlight "CursorLineFold" {:fg colors.green :bg colors.dark1})
 (highlight "SignColumn" {:fg colors.dark3})
-(highlight "LineNr" {:fg colors.dark3 :bg colors.dark1})
 (highlight "MatchParen" {:bg colors.dark3})
 (highlight "SignColumn" {:fg colors.dark3 :bg colors.dark1})
 (highlight "Pmenu" {:fg colors.light0 :bg colors.dark1})color
 (highlight "PmenuSel" {:fg colors.dark0 :bg colors.light0})
-(highlight "IncSearch" {:fg colors.dark1 :bg colors.yellow})
+(highlight "IncSearch" {:fg colors.dark1 :bg colors.orange})
 (highlight "Search" {:fg colors.dark1 :bg colors.yellow})
 (highlight "NonText" {:fg colors.dark3})
 (highlight "ColorColumn" {:bg colors.dark1})
@@ -36,6 +34,7 @@
 (highlight "MoreMsg" {:fg colors.orange})
 (highlight "Wildmenu" {:fg colors.yellow})
 (highlight "Todo" {:fg colors.dark1 :bg colors.yellow})
+(highlight "WarningMsg" {:fg colors.red})
 
 (highlight "TabLine" {:fg colors.dark3 :bg colors.dark1})
 (highlight "TabLineFill" {:fg colors.dark3 :bg colors.dark1})

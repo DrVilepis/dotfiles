@@ -20,6 +20,7 @@
 (init-lsp :elmls)
 (init-lsp :clojure_lsp)
 (init-lsp :lua_ls)
+(init-lsp :wgsl_analyzer)
 ;;(init-lsp :rust_analyzer)
 ;; (init-lsp :pyright)
  (let [rust-tools (require "rust-tools")]

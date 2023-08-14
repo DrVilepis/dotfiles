@@ -9,7 +9,5 @@
            :topdelete    {:text "^"}
            :changedelete {:text "~"}
            :untracked    {:text "┆"}}
-   :keymaps {:noremap true
-             :buffer true}
    :current_line_blame false
    :update_debounce 100})

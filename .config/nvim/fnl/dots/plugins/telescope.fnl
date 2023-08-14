@@ -4,10 +4,8 @@
              telescope telescope
              actions telescope.actions}})
 
-
 (telescope.setup
-  {
-   :defaults
+  {:defaults
    {:borderchars {:prompt  [ "─" "│" "─" "│" "┌" "┐" "┘" "└" ]
                   :results [ "─" "│" "─" "│" "┌" "┐" "┘" "└" ]
                   :preview [ "─" "│" "─" "│" "┌" "┐" "┘" "└" ]}

@@ -6,22 +6,7 @@
       s luasnip.snippet]
   (luasnip.add_snippets
     :rust
-    [(luasnip.snippet "readints"
-                      [(luasnip.text_node
-                         ["#[macro_export]"
-                          "macro_rules! readints {"
-                          "    ($x:ident) => {{"
-                          "        let mut input = String::new();"
-                          "        $x.read_line(&mut $y).unwrap();"
-                          "        let nums = input"
-                          "            .trim()"
-                          "            .split_whitespace()"
-                          "            .map(|s| s.parse().unwrap())"
-                          "            .collect::<Vec<_>>();"
-                          "        nums"
-                          "    }};"
-                          "}"])])
-     (luasnip.snippet "is_prime"
+    [(luasnip.snippet "is_prime"
                       [(luasnip.text_node
                          ["fn is_prime(n: usize) -> bool {"
                           "    match n {"
@@ -46,11 +31,4 @@
                           "        }"
                           "        None"
                           "    })"
-                          "}" ])])
-     (luasnip.snippet "mainstdin"
-                      [(luasnip.text_node
-                         ["fn main() {"
-                          "    let mut stdin = std::io::stdin();"
-                          "    let mut input = String::new();"
-                          "    stdin.read_line(&mut input).unwrap();"
                           "}"])])]))
