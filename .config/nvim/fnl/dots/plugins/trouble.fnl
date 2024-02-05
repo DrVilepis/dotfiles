@@ -1,6 +1,4 @@
-(module dots.plugins.trouble
-  {autoload {a aniseed.core
-             trouble trouble}})
+(local trouble (require "trouble"))
 
 (trouble.setup
   {:action_keys

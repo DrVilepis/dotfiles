@@ -1,8 +1,6 @@
-(module dots.plugins.telescope
-  {autoload {a aniseed.core
-             nvim aniseed.nvim
-             telescope telescope
-             actions telescope.actions}})
+(local telescope (require "telescope"))
+(local themes (require "telescope.themes"))
+(local actions (require "telescope.actions"))
 
 (telescope.setup
   {:defaults
@@ -18,4 +16,4 @@
     :extensions
     {:fzf {:fuzzy true}}}})
 
-(telescope.load_extension "fzf")
+;; (telescope.load_extension "fzf")

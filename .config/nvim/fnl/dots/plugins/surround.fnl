@@ -1,5 +1,3 @@
-(module dots.plugins.surround
-  {autoload {a aniseed.core
-             surround nvim-surround}})
+(local surround (require "nvim-surround"))
 
 (surround.setup {})

@@ -1,8 +1,5 @@
-(module dots.plugins.testaustime
-  {autoload {a aniseed.core
-             utils dots.utils
-             : testaustime}})
-
+(local utils (require "dots.utils"))
+(local testaustime (require "testaustime"))
 
 (testaustime.setup
   {:token (utils.get_testaustime_token)
@@ -15,4 +12,6 @@
                        :NeogitPopup
                        :gitcommit
                        :packer
-                       :Cmp_menu]})
+                       :Cmp_menu
+                       :Lazy
+                       :Checkhealth]})

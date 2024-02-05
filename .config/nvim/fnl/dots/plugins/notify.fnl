@@ -1,6 +1,4 @@
-(module dots.plugins.notify
-  {autoload {a aniseed.core
-             notify notify}})
+(local notify (require "notify"))
 
 (notify.setup {:render :minimal
                :stages :static})

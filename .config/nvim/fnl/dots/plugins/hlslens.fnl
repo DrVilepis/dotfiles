@@ -1,5 +1,3 @@
-(module dots.plugins.hlslens
-  {autoload {a aniseed.core
-             hl hlslens}})
+(local hl (require "hlslens"))
 
 (hl.setup)

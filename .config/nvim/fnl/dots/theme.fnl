@@ -1,11 +1,11 @@
-(module dots.theme
-  {autoload {{: colors} dots.colors}})
+(local colors (require "dots.colors.tomorrow"))
 
-(defn- highlight [group value] (vim.api.nvim_set_hl 0 group value))
+(fn highlight [group value] (vim.api.nvim_set_hl 0 group value))
 
 ;; Vim colors
-(highlight "Normal" {:fg colors.light1})
+(highlight "Normal" {:fg colors.light0})
 (highlight "Bold" {:bold true})
+(highlight "Whitespace" {:fg colors.light0})
 (highlight "Directory" {:fg colors.blue})
 (highlight "Error" {:fg colors.dark0 :bg colors.red})
 (highlight "ErrorMsg" {:fg colors.red :bg colors.dark0})
@@ -13,7 +13,7 @@
 (highlight "FoldColumn" {:fg colors.cyan :bg colors.dark1})
 (highlight "Folded" {:fg colors.dark2})
 (highlight "Visual" {:bg colors.dark2})
-(highlight "Title" {:fg colors.blue})
+(highlight "Title" {:fg colors.cyan})
 (highlight "Cursor" {:fg colors.dark0 :bg colors.light0})
 (highlight "CursorLine" {:bg colors.dark1})
 (highlight "LineNr" {:fg colors.dark3 :bg colors.dark1})
@@ -23,18 +23,25 @@
 (highlight "SignColumn" {:fg colors.dark3})
 (highlight "MatchParen" {:bg colors.dark3})
 (highlight "SignColumn" {:fg colors.dark3 :bg colors.dark1})
-(highlight "Pmenu" {:fg colors.light0 :bg colors.dark1})color
+(highlight "Pmenu" {:fg colors.light0 :bg colors.dark1})
 (highlight "PmenuSel" {:fg colors.dark0 :bg colors.light0})
-(highlight "IncSearch" {:fg colors.dark1 :bg colors.orange})
-(highlight "Search" {:fg colors.dark1 :bg colors.yellow})
+(highlight "IncSearch" {:fg colors.dark3 :bg colors.light0})
+(highlight "Search" {:bg colors.dark3})
 (highlight "NonText" {:fg colors.dark3})
 (highlight "ColorColumn" {:bg colors.dark1})
 (highlight "Conceal" {:fg colors.blue :bg colors.dark0})
 (highlight "ModeMsg" {:fg colors.green})
 (highlight "MoreMsg" {:fg colors.orange})
-(highlight "Wildmenu" {:fg colors.yellow})
+(highlight "Wildmenu" {:fg colors.light0})
 (highlight "Todo" {:fg colors.dark1 :bg colors.yellow})
 (highlight "WarningMsg" {:fg colors.red})
+
+(highlight "DiagnosticWarn" {:fg colors.yellow})
+(highlight "DiagnosticWarnSign" {:fg colors.yellow})
+
+(highlight "IblScope" {:fg colors.light0})
+(highlight "IblWhitespace" {:fg colors.light0})
+(highlight "@ibl.scope.char.1" {:fg colors.cyan})
 
 (highlight "TabLine" {:fg colors.dark3 :bg colors.dark1})
 (highlight "TabLineFill" {:fg colors.dark3 :bg colors.dark1})
@@ -51,11 +58,11 @@
 (highlight "Identifier" {:fg colors.red})
 (highlight "Function" {:fg colors.blue})
 
-(highlight "Conditional" {:fg colors.purple})
+(highlight "Conditional" {:fg colors.magenta})
 (highlight "Repeat" {:fg colors.yellow})
 (highlight "Label" {:fg colors.yellow})
-(highlight "Operator" {:fg colors.light1})
-(highlight "Keyword" {:fg colors.purple})
+(highlight "Operator" {:fg colors.light0})
+(highlight "Keyword" {:fg colors.magenta})
 (highlight "Exception" {:fg colors.red})
 (highlight "Statement" {:fg colors.red})
 (highlight "Macro" {:fg colors.red})
@@ -63,16 +70,21 @@
 (highlight "SpecialChar" {:fg colors.brown})
 (highlight "Delimiter" {:fg colors.brown})
 (highlight "Include" {:fg colors.blue})
-(highlight "Define" {:fg colors.purple})
+(highlight "Define" {:fg colors.magenta})
 (highlight "PreProc" {:fg colors.blue})
+
+(highlight "DiagnosticError" {:fg colors.red})
+(highlight "DiagnosticWarn" {:fg colors.yellow})
+(highlight "DiagnosticHint" {:fg colors.light0})
+(highlight "DiagnosticInfo" {:fg colors.light0})
 
 (highlight "Structure" {:fg colors.yellow})
 (highlight "Type" {:fg colors.yellow})
-(highlight "Comment" {:fg colors.dark4})
+(highlight "Comment" {:fg colors.dark3})
 
 ;; Rust
 (highlight "@lsp.type.namespace.rust" {:link "Identifier"})
-(highlight "@lsp.typemod.enumMember.defaultLibrary.rust" {:link "Special"})
+(highlight "@lsp.mod.attribute.rust" {:link "Identifier"})
 
 ;; Diffs
 (highlight "DiffAdd" {:fg colors.green :bg colors.dark1})

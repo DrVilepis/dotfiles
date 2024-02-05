@@ -1,6 +1,4 @@
-(module dots.plugins.dressing
-  {autoload {a aniseed.core
-             : dressing}})
+(local dressing (require "dressing"))
 
 (dressing.setup
   {:input {:border ["┌" "─" "┐" "│" "┘" "─" "└" "│"]}})

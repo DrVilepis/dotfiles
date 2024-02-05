@@ -1,5 +1,3 @@
-(module dots.plugins.crates
-  {autoload {a aniseed.core
-             crates crates}})
+(local crates (require "crates"))
 
-(crates.setup {:avoid_prerelease false})
+(crates.setup {})

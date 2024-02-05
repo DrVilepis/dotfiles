@@ -1,5 +1,3 @@
-(module dots.plugins.marks
-  {autoload {a aniseed.core
-             marks marks}})
+(local marks (require "marks"))
 
 (marks.setup)

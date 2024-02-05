@@ -1,19 +1,17 @@
-(module dots.keybinds
-  {autoload {a aniseed.core
-             gs gitsigns
-             : plenary
-             : bufferline
-             : bufdelete
-             : trouble
-             ts_utils nvim-treesitter.ts_utils
-             utils dots.utils
-             telescope_builtin telescope.builtin
-             telescope_themes telescope.themes}})
+(local plenary (require "plenary"))
+(local bufferline (require "bufferline"))
+(local bufdelete (require "bufdelete"))
+(local trouble (require "trouble"))
+(local ts_utils (require "nvim-treesitter.ts_utils"))
+(local utils (require "dots.utils"))
+(local telescope_builtin (require "telescope.builtin"))
+(local telescope_themes (require "telescope.themes"))
+(local gs (require "gitsigns"))
 
-(defn map [mode lhs rhs ?opts]
+(fn map [mode lhs rhs ?opts]
   (vim.keymap.set mode lhs rhs (or ?opts {:noremap true})))
 
-;; (map :t "<Esc>" "<C-\\><C-n>")
+(map :t "<Esc>" "<C-\\><C-n>")
 (map :n "<leader>dd" "\"_dd")
 
 (for [i 1 9]
@@ -43,17 +41,18 @@
 ;; Lsp keybinds
 (map :n "<leader><space>" vim.lsp.buf.hover)
 (map :n "<leader>lr" vim.lsp.buf.rename)
+(map :n "<leader>a" vim.lsp.buf.code_action)
 (map :n "<leader>ls" (fn [] (vim.lsp.stop_client (vim.lsp.get_active_clients))
                        (vim.notify "Lsp stopped" vim.log.levels.WARN)))
 
 ;; Rust related keybinds
 (map :n "<leader>rs" "<cmd>RustStartStandaloneServerForBuffer<CR>")
 (map :n "<leader>rh" "<cmd>RustHoverRange<CR>")
-(map :n "<leader>ra" "<cmd>RustCodeAction<CR>")
 (map :n "<leader>ru" "<cmd>RustMoveItemUp<CR>")
 (map :n "<leader>rd" "<cmd>RustMoveItemDown<CR>")
 (map :n "<leader>re" "<cmd>RustExpandMacro<CR>")
 (map :n "<leader>rp" "<cmd>RustParentModule<CR>")
+(map :n "<leader>rd" "<cmd>RustOpenExternalDocs<CR>")
 
 ;; Gitsigns
 (map [:n :v] "<leader>hs" gs.stage_hunk)
@@ -63,10 +62,8 @@
 (map :n "<leader>hR" gs.reset_buffer)
 (map :n "<leader>hp" gs.preview_hunk)
 (map :n "<leader>hb" #(gs.blame_line {:full true}))
-;; (map :n "<leader>tb" gs.toggle_current_line_blame)
 (map :n "<leader>hd" gs.diffthis)
 (map :n "<leader>hD" #(gs.diffthis "~"))
-;; (map :n "<leader>hd" gs.toggle_deleted)
 
 (map :n "<leader>rf" ":RustFmt<CR>")
 
@@ -84,11 +81,18 @@
 (map [:n :v] :k :j)
 (map [:n :v] :l :k)
 (map [:n :v] :ö :l)
+(map [:n :v] :gj :gh)
+(map [:n :v] :gk :gj)
+(map [:n :v] :gl :gk)
+(map [:n :v] :gö :gl)
 (map [:n :v] :K vim.diagnostic.goto_next)
 (map [:n :v] :L vim.diagnostic.goto_prev)
 (map [:n :v] :Ö :L)
-
 (map [:n :v] :<C-W>j :<C-W>h)
 (map [:n :v] :<C-W>k :<C-W>j)
 (map [:n :v] :<C-W>l :<C-W>k)
 (map [:n :v] :<C-W>ö :<C-W>l)
+(map [:n :v] :<C-W>J :<C-W>H)
+(map [:n :v] :<C-W>K :<C-W>J)
+(map [:n :v] :<C-W>L :<C-W>K)
+(map [:n :v] :<C-W>Ö :<C-W>L)

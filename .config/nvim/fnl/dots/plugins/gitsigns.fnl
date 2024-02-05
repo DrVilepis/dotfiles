@@ -1,6 +1,4 @@
-(module dots.plugins.gitsigns
-  {autoload {a aniseed.core
-             gitsigns gitsigns}})
+(local gitsigns (require "gitsigns"))
 
 (gitsigns.setup
   {:signs {:add          {:text "|"}

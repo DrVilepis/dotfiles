@@ -1,9 +1,5 @@
-(module vile-nvim
-  {autoload {a aniseed.core
-             nvim aniseed.nvim
-             plugins dots.plugins
-             utils dots.utils
-             {: colors} dots.colors}})
+(local plugins (require "dots.plugins"))
+(local utils (require "dots.utils"))
 
 (set vim.o.termguicolors true)
 (set vim.o.tabstop 4)
@@ -19,21 +15,22 @@
 (set vim.o.cmdheight 1)
 (set vim.o.scrolloff 3)
 (set vim.o.cursorline true)
+(set vim.o.ignorecase true)
+(set vim.o.smartcase true)
+(set vim.o.hlsearch true)
 (set vim.o.signcolumn "yes:1")
+(set vim.o.colorcolumn "+1")
+(set vim.o.splitright true)
 
-(require :dots.keybinds)
-(require :dots.filetypes)
-
-(vim.api.nvim_create_autocmd ["BufWritePre"] {:callback utils.trim_trailing_whitespaces})
-
-(require :dots.theme)
-
-(plugins.use
+(plugins.use {
   ;; Starting speed
   :lewis6991/impatient.nvim {}
 
-  ;; Fennel config support
-  :Olical/aniseed {}
+  ;; Fennel
+  :udayvir-singh/tangerine.nvim {}
+
+  ;; Deps
+  :nvim-lua/plenary.nvim {}
 
   ;; Lsp
   :neovim/nvim-lspconfig {:mod :lsp}
@@ -47,11 +44,12 @@
   :Saecki/crates.nvim {:mod :crates}
 
   ;; Debugger
-  :mfussenegger/nvim-dap {:opt false}
+  :mfussenegger/nvim-dap {}
 
   ;; Vanity
   :lukas-reineke/indent-blankline.nvim {:mod :indent}
   :nvim-treesitter/nvim-treesitter {:mod :treesitter}
+  :nkrkv/nvim-treesitter-rescript {}
   :kevinhwang91/nvim-hlslens {:mod :hlslens}
 
   ;; Rust
@@ -72,8 +70,10 @@
   :nvim-lua/lsp-status.nvim {}
 
   ;; Telescope
-  :nvim-telescope/telescope-fzf-native.nvim {:run "make"}
-  :nvim-telescope/telescope.nvim {:requires [[:nvim-lua/popup.nvim] [:nvim-lua/plenary.nvim]]}
+  :nvim-telescope/telescope-fzf-native.nvim {:build "make"}
+  :nvim-telescope/telescope.nvim {:requires [[:nvim-lua/popup.nvim] [:nvim-lua/plenary.nvim]]
+                                  :mod :telescope}
+  :stevearc/dressing.nvim {:mod :dressing}
 
   ;; Buffers
   :akinsho/bufferline.nvim {:mod :bufferline :requires [[:kyazdani42/nvim-web-devicons]]}
@@ -98,10 +98,18 @@
   ;; nvim-cmp for completion
   :hrsh7th/cmp-nvim-lsp {}
   :hrsh7th/cmp-path {}
+  :tzachar/fuzzy.nvim {}
   :tzachar/cmp-fuzzy-buffer {:requires [[:hrsh7th/nvim-cmp] [:tzachar/fuzzy.nvim]]}
   :hrsh7th/nvim-cmp {:opt false
                      :requires [:hrsh7th/cmp-nvim-lsp
                                 :hrsh7th/cmp-path]
-                     :mod :cmp}
+                     :mod :cmp}})
 
-  :wbthomason/packer.nvim {})
+;; Setup
+
+(require :dots.keybinds)
+(require :dots.filetypes)
+
+(vim.api.nvim_create_autocmd ["BufWritePre"] {:callback utils.trim_trailing_whitespaces})
+
+(require :dots.theme)

@@ -1,9 +1,6 @@
-(module dots.plugins.lualine
-  {autoload {a aniseed.core
-             nvim aniseed.nvim
-             utils dots.utils
-             : lualine
-             {: colors} dots.colors}})
+(local utils (require "dots.utils"))
+(local lualine (require "lualine"))
+(local colors (require "dots.colors.tomorrow"))
 
 (lualine.setup
   {:options
@@ -11,29 +8,29 @@
     :component_separators {:left "┃" :right "┃"}
     :section_separators {:left "" :right ""}
     :theme {:normal
-            {:a {:bg colors.light2 :fg colors.dark0 :gui :bold}
-             :b {:bg colors.dark1 :fg colors.light3}
-             :c {:bg colors.dark2 :fg colors.light3}}
+            {:a {:bg colors.light0 :fg colors.dark0 :gui :bold}
+             :b {:bg colors.dark2 :fg colors.light0}
+             :c {:bg colors.dark1 :fg colors.light0}}
             :insert
             {:a {:bg colors.green :fg colors.dark0 :gui :bold}
-             :b {:bg colors.dark1 :fg colors.green}
-             :c {:bg colors.dark2 :fg colors.green}}
+             :b {:bg colors.dark2 :fg colors.green}
+             :c {:bg colors.dark1 :fg colors.green}}
             :visual
             {:a {:bg colors.blue :fg colors.dark0 :gui :bold}
-             :b {:bg colors.dark1 :fg colors.blue}
+             :b {:bg colors.dark2 :fg colors.blue}
              :c {:bg colors.dark1 :fg colors.blue}}
             :replace
             {:a {:bg colors.red :fg colors.dark0 :gui :bold}
-             :b {:bg colors.dark1 :fg colors.red}
+             :b {:bg colors.dark2 :fg colors.red}
              :c {:bg colors.dark1 :fg colors.red}}
             :command
-            {:a {:bg colors.purple :fg colors.dark0 :gui :bold}
-             :b {:bg colors.dark1 :fg colors.purple}
-             :c {:bg colors.dark1 :fg colors.purple}}
+            {:a {:bg colors.magenta :fg colors.dark0 :gui :bold}
+             :b {:bg colors.dark2 :fg colors.magenta}
+             :c {:bg colors.dark1 :fg colors.magenta}}
             :inactive
-            {:a {:bg colors.dark1 :fg colors.light3 :gui :bold}
-             :b {:bg colors.dark1 :fg colors.light3}
-             :c {:bg colors.dark1 :fg colors.light3}}}}
+            {:a {:bg colors.dark1 :fg colors.light0 :gui :bold}
+             :b {:bg colors.dark1 :fg colors.light0}
+             :c {:bg colors.dark1 :fg colors.light0}}}}
    :sections {:lualine_a [:mode]
               :lualine_b [:hostname
                           (fn [] (let [lsp (vim.lsp.get_active_clients)]
@@ -43,7 +40,7 @@
                                          "None"))))]
               :lualine_c [:filename :branch :diff]
               :lualine_x [:encoding :fileformat]
-              :lualine_y [#(if (= vim.bo.filetype "text") (.. "Chars: " (. (vim.fn.wordcount) :bytes)) "")
+              :lualine_y [#(if (or (= vim.bo.filetype "text") (= vim.bo.filetype "markdown")) (.. "Chars: " (. (vim.fn.wordcount) :chars)) "")
                           {0         :filetype
                            :on_click utils.select_filetype}]
               :lualine_z [(fn [] (let [[cur_line cur_char] (vim.api.nvim_win_get_cursor 0)]

@@ -1,6 +1,4 @@
-(module dots.plugins.devicons
-  {autoload {a aniseed.core
-             devicons nvim-web-devicons}})
+(local devicons (require "nvim-web-devicons"))
 
 (devicons.setup
   {:override

@@ -1,20 +1,54 @@
-local vim_config_root = vim.fn.expand("<sfile>:p:h")
-local pack_path = vim.fn.stdpath("data") .. "/site/pack"
+vim.loader.enable()
 
-function ensure(user, repo, branch, commit)
-  local install_path = pack_path .. "/packer/start/" .. repo
-  if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    vim.fn.system({"git", "clone", "--depth", "1", "--branch", branch, "https://github.com/" .. user .. "/" .. repo, install_path})
-    if commit ~= nil then
-      vim.fn.system({"git", "--git-dir", install_path .. "/.git", "reset", "--hard", commit})
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+-- pick your plugin manager
+local pack = "lazy"
+
+local function bootstrap(url, ref)
+    local name = url:gsub(".*/", "")
+    local path
+
+    path = vim.fn.stdpath("data") .. "/lazy/" .. name
+    vim.opt.rtp:prepend(path)
+
+    if vim.fn.isdirectory(path) == 0 then
+        print(name .. ": installing in data dir...")
+
+        vim.fn.system {"git", "clone", url, path}
+        if ref then
+            vim.fn.system {"git", "-C", path, "checkout", ref}
+        end
+
+        vim.cmd "redraw"
+        print(name .. ": finished installing")
     end
-    vim.api.nvim_command(string.format("packadd %s", repo))
-  end
 end
 
-ensure("wbthomason", "packer.nvim", "master")
-ensure("Olical", "aniseed", "master")
-ensure("lewis6991", "impatient.nvim", "main")
+-- for git head
+bootstrap("https://github.com/udayvir-singh/tangerine.nvim")
+bootstrap("https://github.com/lewis6991/impatient.nvim")
+
+local nvim_dir = vim.fn.stdpath [[config]]
 
 require("impatient")
-vim.g["aniseed#env"] = {compile = true}
+
+require("tangerine").setup({
+    vimrc = nvim_dir .. "/fnl/init.fnl",
+    source = nvim_dir .. "/fnl",
+    compiler = {
+        verbose = false,
+        hooks = {"onsave"}
+    },
+})
