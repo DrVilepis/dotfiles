@@ -7,13 +7,16 @@
    {:borderchars {:prompt  [ "─" "│" "─" "│" "┌" "┐" "┘" "└" ]
                   :results [ "─" "│" "─" "│" "┌" "┐" "┘" "└" ]
                   :preview [ "─" "│" "─" "│" "┌" "┐" "┘" "└" ]}
-    :pickers
-    {:find_file
-     {:theme :dropdown}}
-    :mappings
-    {:i {:<C-k> actions.move_selection_next
-         :<C-l> actions.move_selection_previous}}
-    :extensions
-    {:fzf {:fuzzy true}}}})
+    :file_ignore_patterns ["^node_modules/"]
+    :mappings {:i {:<A-k> actions.move_selection_next
+                   :<A-l> actions.move_selection_previous}
+               :n {:k actions.move_selection_next
+                   :l actions.move_selection_previous}}}
+   :pickers
+   {:find_file
+    {:theme :dropdown}}
+   :extensions
+   {:fzf {:fuzzy true}}})
 
-;; (telescope.load_extension "fzf")
+(telescope.load_extension "fzf")
+(telescope.load_extension "find_template")

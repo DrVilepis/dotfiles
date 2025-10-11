@@ -39,6 +39,7 @@ end
 -- for git head
 bootstrap("https://github.com/udayvir-singh/tangerine.nvim")
 bootstrap("https://github.com/lewis6991/impatient.nvim")
+bootstrap("https://github.com/udayvir-singh/hibiscus.nvim")
 
 local nvim_dir = vim.fn.stdpath [[config]]
 
@@ -47,8 +48,24 @@ require("impatient")
 require("tangerine").setup({
     vimrc = nvim_dir .. "/fnl/init.fnl",
     source = nvim_dir .. "/fnl",
+    rtpdirs = {
+        "/lua",
+    },
     compiler = {
         verbose = false,
         hooks = {"onsave"}
     },
 })
+
+--[[ local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+parser_config.moonscript = {
+  install_info = {
+    url = "~/dev/projects/tree-sitter-moonscript",
+    files = {"src/parser.c", "src/scanner.c"},
+
+    branch = "main",
+    generate_requires_npm = false,
+    requires_generate_from_grammar = false,
+  },
+  filetype = "moonscript",
+} ]]--

@@ -7,6 +7,7 @@
  :light1 "#c8baa4"
  :light2 "#cdc0ad"
  :light3 "#d1c6b4"
+
  :red "#fb4934"
  :orange "#fe8019"
  :yellow "#fabd2f"
@@ -14,4 +15,13 @@
  :cyan "#7cbfaa"
  :blue "#7984b3"
  :purple "#b788cb"
- :brown "#d65d03"}
+ :brown "#d65d03"
+
+ :red_mute "#7d241a"
+ :orange_mute "#7f400c"
+ :yellow_mute "#7d5e17"
+ :green_mute "#5c5d13"
+ :cyan_mute "#3e5f55"
+ :blue_mute "#3c4259"
+ :purple_mute "#5b4465"
+ :brown_mute "#6b2e01"}

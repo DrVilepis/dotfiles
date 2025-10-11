@@ -4,6 +4,7 @@
 (local trouble (require "trouble"))
 (local ts_utils (require "nvim-treesitter.ts_utils"))
 (local utils (require "dots.utils"))
+(local telescope (require "telescope"))
 (local telescope_builtin (require "telescope.builtin"))
 (local telescope_themes (require "telescope.themes"))
 (local gs (require "gitsigns"))
@@ -26,21 +27,23 @@
 (map :n "<leader>fo" telescope_builtin.oldfiles)
 (map :n "<leader>fm" telescope_builtin.marks)
 (map :n "<leader>fl" utils.select_filetype)
+(map :n "<leader>ft" #(telescope.extensions.find_template.find_template {:type :insert}))
 
 ;; Bufferline keybinds
 (map :n "bö" "<cmd>BufferLineCycleNext<CR>")
 (map :n "bj" "<cmd>BufferLineCyclePrev<CR>")
 (map :n "bl" "<cmd>BufferLineMoveNext<CR>")
 (map :n "bk" "<cmd>BufferLineMovePrev<CR>")
-(map :n "bf" "<cmd>BufferLinePick<CR>")
+(map :n "bb" "<cmd>BufferLinePick<CR>")
 (map :n "bd" #(bufdelete.bufdelete 0 true) {:noremap true :silent true})
 
 (map :n "<leader>sh" "<cmd>split<CR>")
 (map :n "<leader>sv" "<cmd>vsplit<CR>")
 
 ;; Lsp keybinds
-(map :n "<leader><space>" vim.lsp.buf.hover)
+(map :n "<leader><space>" #(vim.lsp.buf.hover {:border :solid}))
 (map :n "<leader>lr" vim.lsp.buf.rename)
+(map :n "<leader>ld" vim.lsp.buf.definition)
 (map :n "<leader>a" vim.lsp.buf.code_action)
 (map :n "<leader>ls" (fn [] (vim.lsp.stop_client (vim.lsp.get_active_clients))
                        (vim.notify "Lsp stopped" vim.log.levels.WARN)))

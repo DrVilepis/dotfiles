@@ -3,7 +3,7 @@
 (fn utils.trim_trailing_whitespaces []
   (when (and (not vim.o.binary) (~= vim.o.filetype :diff))
     (let [current_view (vim.fn.winsaveview)]
-        (vim.cmd "keeppatterns %s/\\s\\+$//e")
+        (vim.cmd "keepjumps keeppatterns silent! %s/\\s\\+$//e")
         (vim.fn.winrestview current_view))))
 
 (fn utils.get_testaustime_token []

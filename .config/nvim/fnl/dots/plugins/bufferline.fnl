@@ -1,32 +1,40 @@
 (local bufferline (require "bufferline"))
 (local colors (require "dots.colors.tomorrow"))
 
+(local fnm vim.fn.fnamemodify)
+
+(fn format_relative [buf] (.. (fnm buf.path ":p:h:t") "/" buf.name))
+
 (bufferline.setup
   {:options
-   {:diagnostics :nvim_lsp
+   {:diagnostics "nvim_lsp"
+    :numbers "ordinal"
     :show_close_icon false
     :show_buffer_clone_icons false
     :separator_style :thin
     :buffer_close_icon ""
     :modified_icon "●"
-    :close_icon ""}
+    :close_icon ""
+    :name_formatter (fn [buf] (if (= buf.name "mod.rs")
+                                (format_relative buf)
+                                (fnm buf.path ":t")))}
    :highlights
    {:fill                   {:bg colors.dark0}
     :background             {:bg colors.dark1}
-    :close_button           {:fg colors.light0  :bg colors.dark1}
-    :close_button_visible   {:fg colors.light0  :bg colors.dark1}
-    :close_button_selected  {:fg colors.light0  :bg colors.dark2}
-    :indicator_selected     {:fg colors.dark2   :bg colors.dark2}
-    :indicator_visible      {:fg colors.dark1   :bg colors.dark1}
+    :close_button           {:fg colors.light0 :bg colors.dark1}
+    :close_button_visible   {:fg colors.light0 :bg colors.dark1}
+    :close_button_selected  {:fg colors.light0 :bg colors.dark2}
+    :indicator_selected     {:fg colors.dark2  :bg colors.dark2}
+    :indicator_visible      {:fg colors.dark1  :bg colors.dark1}
     :modified               {:bg colors.dark1}
     :modified_selected      {:bg colors.dark2}
     :modified_visible       {:bg colors.dark1}
-    :warning                {:fg colors.yellow  :bg colors.dark1}
-    :warning_selected       {:fg colors.yellow  :bg colors.dark2}
-    :warning_visible        {:fg colors.yellow  :bg colors.dark1}
-    :error                  {:fg colors.red     :bg colors.dark1}
-    :error_selected         {:fg colors.red     :bg colors.dark2}
-    :error_visible          {:fg colors.red     :bg colors.dark1}
+    :warning                {:fg colors.yellow :bg colors.dark1}
+    :warning_selected       {:fg colors.yellow :bg colors.dark2}
+    :warning_visible        {:fg colors.yellow :bg colors.dark1}
+    :error                  {:fg colors.red    :bg colors.dark1}
+    :error_selected         {:fg colors.red    :bg colors.dark2}
+    :error_visible          {:fg colors.red    :bg colors.dark1}
     :hint                   {:bg colors.dark1}
     :hint_selected          {:bg colors.dark2}
     :hint_visible           {:bg colors.dark1}
@@ -37,6 +45,9 @@
     :duplicate              {:bg colors.dark1}
     :duplicate_selected     {:bg colors.dark2}
     :duplicate_visible      {:bg colors.dark2}
-    :buffer                 {:fg colors.light0  :bg colors.dark1}
-    :buffer_visible         {:fg colors.light0  :bg colors.dark1}
-    :buffer_selected        {:fg colors.light0  :bg colors.dark2}}})
+    :buffer                 {:fg colors.light0 :bg colors.dark1}
+    :buffer_visible         {:fg colors.light0 :bg colors.dark1}
+    :buffer_selected        {:fg colors.light0 :bg colors.dark2}
+    :numbers                {:bg colors.dark1}
+    :numbers_visible        {:bg colors.dark1}
+    :numbers_selected       {:fg colors.light0 :bg colors.dark2}}})

@@ -4,6 +4,7 @@
 
 ;; Vim colors
 (highlight "Normal" {:fg colors.light0})
+(highlight "NormalFloat" {:bg colors.dark1})
 (highlight "Bold" {:bold true})
 (highlight "Whitespace" {:fg colors.light0})
 (highlight "Directory" {:fg colors.blue})
@@ -11,7 +12,8 @@
 (highlight "ErrorMsg" {:fg colors.red :bg colors.dark0})
 (highlight "Exception" {:fg colors.red})
 (highlight "FoldColumn" {:fg colors.cyan :bg colors.dark1})
-(highlight "Folded" {:fg colors.dark2})
+(highlight "Question" {:fg colors.cyan})
+
 (highlight "Visual" {:bg colors.dark2})
 (highlight "Title" {:fg colors.cyan})
 (highlight "Cursor" {:fg colors.dark0 :bg colors.light0})
@@ -20,7 +22,6 @@
 (highlight "CursorLineNr" {:fg colors.green :bg colors.dark1})
 (highlight "CursorLineSign" {:fg colors.green :bg colors.dark1})
 (highlight "CursorLineFold" {:fg colors.green :bg colors.dark1})
-(highlight "SignColumn" {:fg colors.dark3})
 (highlight "MatchParen" {:bg colors.dark3})
 (highlight "SignColumn" {:fg colors.dark3 :bg colors.dark1})
 (highlight "Pmenu" {:fg colors.light0 :bg colors.dark1})
@@ -36,13 +37,22 @@
 (highlight "Todo" {:fg colors.dark1 :bg colors.yellow})
 (highlight "WarningMsg" {:fg colors.red})
 
+;; Diagnostics
+(highlight "DiagnosticSignInfo" {:bg colors.dark1 :fg colors.light0})
+(highlight "DiagnosticSignHint" {:bg colors.dark1 :fg colors.light0})
+(highlight "DiagnosticSignWarn" {:bg colors.dark1 :fg colors.yellow})
+(highlight "DiagnosticSignError" {:bg colors.dark1 :fg colors.red})
+(highlight "DiagnosticInfo" {:fg colors.light0})
+(highlight "DiagnosticHint" {:fg colors.light0})
 (highlight "DiagnosticWarn" {:fg colors.yellow})
-(highlight "DiagnosticWarnSign" {:fg colors.yellow})
+(highlight "DiagnosticError" {:fg colors.red})
 
+;; Indent blankline
 (highlight "IblScope" {:fg colors.light0})
 (highlight "IblWhitespace" {:fg colors.light0})
 (highlight "@ibl.scope.char.1" {:fg colors.cyan})
 
+;; Tabline (lualine)
 (highlight "TabLine" {:fg colors.dark3 :bg colors.dark1})
 (highlight "TabLineFill" {:fg colors.dark3 :bg colors.dark1})
 (highlight "TabLineSel" {:fg colors.orange :bg colors.dark1})
@@ -73,18 +83,36 @@
 (highlight "Define" {:fg colors.magenta})
 (highlight "PreProc" {:fg colors.blue})
 
-(highlight "DiagnosticError" {:fg colors.red})
-(highlight "DiagnosticWarn" {:fg colors.yellow})
-(highlight "DiagnosticHint" {:fg colors.light0})
-(highlight "DiagnosticInfo" {:fg colors.light0})
-
 (highlight "Structure" {:fg colors.yellow})
 (highlight "Type" {:fg colors.yellow})
 (highlight "Comment" {:fg colors.dark3})
 
+;; Lsp
+(highlight "@module" {:link "Identifier"})
+(highlight "@variable" {:link "Identifier"})
+(highlight "@lsp.type.macro" {:link "Function"})
+
 ;; Rust
+(highlight "@type.builtin.rust" {:link "Type"})
 (highlight "@lsp.type.namespace.rust" {:link "Identifier"})
 (highlight "@lsp.mod.attribute.rust" {:link "Identifier"})
+(highlight "@keyword.storage.lifetime.rust" {:link "Type"})
+
+;; GitSigns
+(highlight "Added" {:fg colors.green :bg colors.dark1})
+(highlight "Changed" {:fg colors.cyan :bg colors.dark1})
+(highlight "Removed" {:fg colors.red :bg colors.dark1})
+(highlight "GitSignsStagedAdd" {:fg colors.green_mute :bg colors.dark1})
+(highlight "GitSignsStagedChange" {:fg colors.cyan_mute :bg colors.dark1})
+(highlight "GitSignsStagedDelete" {:fg colors.red_mute :bg colors.dark1})
+
+(highlight "GitSignsStagedChangedelete" {:link "GitSignsStagedChange"})
+(highlight "GitSignsStagedTopdelete" {:link "GitSignsStagedDelete"})
+(highlight "GitSignsStagedAddNr" {:link "GitSignsStagedAdd"})
+(highlight "GitSignsStagedChangeNr" {:link "GitSignsStagedChange"})
+(highlight "GitSignsStagedDeleteNr" {:link "GitSignsStagedDelete"})
+(highlight "GitSignsStagedChangedeleteNr" {:link "GitSignsStagedChange"})
+(highlight "GitSignsStagedTopdeleteNr" {:link "GitSignsStagedDelete"})
 
 ;; Diffs
 (highlight "DiffAdd" {:fg colors.green :bg colors.dark1})

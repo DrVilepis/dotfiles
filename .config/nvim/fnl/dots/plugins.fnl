@@ -11,8 +11,10 @@
 (fn plugins.use [pkgs]
   (lazy.setup (icollect [name opts (pairs pkgs)]
                         (let [plugin [name]]
-                          (-?> (. opts :mod) ((fn [init] (tset plugin :init #(safe-require-plugin-config init)))))
-                          (-?>> (. opts :build) (tset plugin :build))
+                          (-?> (. opts :mod) ((fn [init]
+                                                (tset plugin :init #(safe-require-plugin-config init))
+                                                (tset opts :mod nil))))
+                          (each [opt value (pairs opts)] (tset plugin opt value))
                           plugin))
               {:performance {:reset_packpath false}}))
 
