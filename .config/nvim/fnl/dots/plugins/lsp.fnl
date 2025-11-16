@@ -1,15 +1,10 @@
-(local lsp (require "lspconfig"))
 (local cmp_lsp (require "cmp_nvim_lsp"))
-(require-macros :hibiscus.core)
 
-(local default-capabilities
-  (let [capabilities (merge! (cmp_lsp.default_capabilities) (vim.lsp.protocol.make_client_capabilities))]
-    (set capabilities.textDocument.completion.completionItem.snippetSupport true)
-    (cmp_lsp.default_capabilities capabilities)))
-
-(fn init-lsp [lsp-name ?opts]
-  (let [merged-opts (merge! (or ?opts []) {:capabilities default-capabilities})]
-    ((. lsp lsp-name :setup) merged-opts)))
+(vim.lsp.config "*" {:capabilities
+                     {:textDocument
+                      {:completion
+                       {:completionItem
+                        {:snippetSupport true}}}}})
 
 (fn handle-attach [args]
   (let [client (vim.lsp.get_client_by_id args.data.client_id)
@@ -18,10 +13,11 @@
 
 (vim.api.nvim_create_autocmd ["LspAttach"] {:callback handle-attach})
 
-(init-lsp :clangd)
-(init-lsp :fennel_ls {:filetypes ["fennel"]
-                      :root_dir (lsp.util.root_pattern "*")
-                      :settings {:fennel-ls {:extra-globals "vim"}}})
+(vim.lsp.enable :clangd)
+(vim.lsp.enable :fennel_ls)
+(vim.lsp.config :fennel_ls {:filetypes ["fennel"]
+                            :root_dir "*"
+                            :settings {:fennel-ls {:extra-globals "vim"}}})
 ;; (init-lsp :asm_lsp)
 ;; (init-lsp :elmls)
 ;; (init-lsp :clojure_lsp)
@@ -33,7 +29,8 @@
 (vim.lsp.enable :lua_ls)
 (vim.lsp.enable :cssls)
 (vim.lsp.enable :glasgow)
-(init-lsp :ts_ls {:init_options
+(vim.lsp.enable :ts_ls)
+(vim.lsp.config :ts_ls {:init_options
                   {:plugins
                    [{:name "@vue/typescript-plugin"
                      :location "/home/drvilepis/.bun/install/global/node_modules/@vue/typescript-plugin"
@@ -43,5 +40,3 @@
                               "typescript"
                               "typescriptreact"
                               "vue"]})
-
-(init-lsp :volar)

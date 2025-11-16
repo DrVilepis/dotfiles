@@ -14,8 +14,6 @@
 (fn utils.select_filetype []
   (set vim.bo.filetype ((. (require "telescope.builtin") :filetypes))))
 
-(fn utils.merge [...] (let [tables [...] out {}] (each [_ t (ipairs tables)] (each [k v (pairs t)] (tset out k v))) out))
-
 (fn utils.load-fthook [filetype] (pcall require (.. "dots.fthooks." filetype)))
 
 utils

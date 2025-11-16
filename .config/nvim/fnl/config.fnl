@@ -28,12 +28,11 @@
   {;; Starting speed
    :lewis6991/impatient.nvim {}
 
-   ;; Fennel
-   :udayvir-singh/tangerine.nvim {}
-   :udayvir-singh/hibiscus.nvim {}
-
    ;; Deps
    :nvim-lua/plenary.nvim {}
+
+   ;; Fennel
+   :aileot/nvim-laurel {}
 
    ;; Lsp
    :neovim/nvim-lspconfig {:mod :lsp}

@@ -16,6 +16,7 @@
                                                 (tset opts :mod nil))))
                           (each [opt value (pairs opts)] (tset plugin opt value))
                           plugin))
-              {:performance {:reset_packpath false}}))
+              {:performance {:reset_packpath false
+	                     :rtp {:reset false}}}))
 
 plugins
